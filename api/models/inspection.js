@@ -8,9 +8,9 @@ const inspectionSchema = Schema({
   client: { type: ObjectId, ref: 'Client' },
   date: String,
   frequency: Number,
-  assigned_to: String,
   auditor: String,
-  comments: String
+  comments: String,
+  worker: { type: ObjectId, ref: 'Employee'}
 });
 
 
