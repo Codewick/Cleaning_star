@@ -9,7 +9,7 @@ const clientSchema = Schema({
   name: String,
   address: String,
   contact_number: Number,
-  e-mail: String,
+  e_mail: String,
   contact_person: String,
   inspections: [{ type: ObjectId, ref: 'Inspection'}]
 });

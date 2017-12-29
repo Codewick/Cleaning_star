@@ -1,9 +1,5 @@
-const express = require('express')
-const bodyParser = require('body-parser')
-
-//Create the server
-const server = express()
-
-server.get('/', (req, res) => {
-  res.send('hello world')
+const app = require('./app');
+const port = 7000;
+app.listen(port, () => {
+  console.log(`Inspections API Server running on ${port}`);
 });

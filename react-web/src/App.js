@@ -1,18 +1,40 @@
 import React, { Component } from 'react';
-import logo from './logo.svg';
 import './App.css';
+import InspectionList from './components/InspectionList';
+import * as inspectionAPI from './api/inspections';
+import InspectionForm from './components/InspectionForm';
 
 class App extends Component {
+  state = { inspections: null }
+
+  componentDidMount() {
+      inspectionAPI.all()
+        .then(inspections => {
+          this.setState({ inspections })
+        })
+    }
+
+  handleInspectionSubmission = (inspection) => {
+    this.setState(({ inspections }) => (
+      { inspections: [ inspection ].concat(inspections) }
+    ));
+
+    inspectionAPI.save(inspection);
+  }
   render() {
+    const { inspections } = this.state;
     return (
       <div className="App">
-        <header className="App-header">
-          <img src={logo} className="App-logo" alt="logo" />
-          <h1 className="App-title">Welcome to React</h1>
-        </header>
-        <p className="App-intro">
-          To get started, edit <code>src/App.js</code> and save to reload.
-        </p>
+        {
+          inspections ? (
+            <InspectionList inspections={ inspections } />
+          ) : (
+            "Loading..."
+          )
+        }
+
+        <hr/>
+        <InspectionForm onSubmit={this.handleInspectionSubmission} />
       </div>
     );
   }
