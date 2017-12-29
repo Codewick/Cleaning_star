@@ -1,0 +1,24 @@
+{
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "cookie-parser": "^1.4.3",
+    "express": "^4.16.2",
+    "express-session": "^1.15.6",
+    "jsonwebtoken": "^8.1.0",
+    "mongoose": "^4.13.7",
+    "passport": "^0.4.0",
+    "passport-jwt": "^3.0.1",
+    "passport-local": "^1.0.0",
+    "passport-local-mongoose": "^4.4.0"
+  },
+  "devDependencies": {
+    "chai": "^4.1.2",
+    "chai-http": "^3.0.0",
+    "mocha": "^4.0.1",
+    "nodemon": "^1.12.4"
+  },
+  "scripts": {
+    "dev": "nodemon server.js",
+    "test": "NODE_ENV=test mocha --watch --recursive test/**/*_test.js"
+  }
+}
