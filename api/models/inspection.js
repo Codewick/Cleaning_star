@@ -5,6 +5,7 @@ const ObjectId = Schema.Types.ObjectId;
 
 
 const inspectionSchema = Schema({
+  _id: ObjectId,
   client: { type: ObjectId, ref: 'Client' },
   date: String,
   frequency: Number,
