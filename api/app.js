@@ -11,6 +11,11 @@ app.use(bodyParser.urlencoded());
 const inspectionsRouter = require('./routes/inspections');
 app.use('/inspections', inspectionsRouter);
 
+const clientsRouter = require('./routes/clients');
+app.use('/clients', clientsRouter);
+
+const employeesRouter = require('./routes/employees');
+app.use('/employees', employeesRouter);
 
 app.get('/', (req, res) => {     //this is a callback
   res.json({
@@ -19,5 +24,23 @@ app.get('/', (req, res) => {     //this is a callback
     }]
   })
 });
+
+app.get('/', (req, res) => {     //this is a callback
+  res.json({
+    resources: [{
+      clients: '/clients'
+    }]
+  })
+});
+
+app.get('/', (req, res) => {     //this is a callback
+  res.json({
+    resources: [{
+      clients: '/employees'
+    }]
+  })
+});
+
+
 
 module.exports = app
