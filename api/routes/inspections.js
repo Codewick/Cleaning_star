@@ -23,8 +23,10 @@ router.get('/', authorize, (req, res) => {
 });
 
 router.post('/', (req, res) => {
+  console.log(`request received at inspections/ endpoint ${res.body}`);
   Inspection.create(req.body)
     .then((inspection) => {
+      console.log(`inspection created ${inspection}`);
       res.status(201).json(inspection).end();
     })
     .catch(error => res.json({ error }))

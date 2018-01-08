@@ -1,16 +1,24 @@
 import React from 'react';
 
-export default function InspectionForm({ onSubmit }) {
+export default function InspectionForm({ clients, onSubmit }) {
   function handleFormSubmission(event) {
     event.preventDefault();
     const { elements } = event.target;
     const auditor = elements["auditor"].value;
     const frequency = elements["frequency"].value;
-    onSubmit({ auditor, frequency });
+    const client = elements["client"].value
+    onSubmit({ auditor, frequency, client });
   }
+
+  console.log(`in inspectionform, received list of clients from container component: `, clients);
 
   return (
     <form onSubmit={handleFormSubmission} >
+    <label>
+      Client
+      &nbsp;
+      <input type="text" name="client"/>
+    </label>
       <label>
         Auditor
         &nbsp;
