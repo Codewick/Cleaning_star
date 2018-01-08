@@ -8,7 +8,8 @@ import InspectionForm from './components/InspectionForm';
 class App extends Component {
   state = {
     inspections: null,
-    clients: null
+    clients: null,
+    selectedClientObjectID: null
    }
 
   componentDidMount() {
@@ -23,6 +24,16 @@ class App extends Component {
         })
     }
 
+  handleSelectClientValueChange = (selectedClientObjectID) => {
+    console.log(`selectedClientObjectID: `, selectedClientObjectID);
+    this.setState((prevState, props) => {
+      console.log('setting state with: ', prevState, props)
+      return { selectedClientObjectID: selectedClientObjectID }
+    });
+
+    console.log(`changed the state of the selectedClient to: `, this.state.selectedClientObjectID);
+  }
+
   handleInspectionSubmission = (inspection) => {
     this.setState(({ inspections }) => (
       { inspections: [ inspection ].concat(inspections) }
@@ -31,7 +42,10 @@ class App extends Component {
     inspectionAPI.save(inspection);
   }
   render() {
-    const { inspections, clients } = this.state;
+    const { inspections, clients, selectedClientObjectID } = this.state;
+
+    console.log(`re-rendering with selectedClientObjectID: `, selectedClientObjectID);
+
     return (
       <div className="App">
         {
@@ -43,7 +57,12 @@ class App extends Component {
         }
 
         <hr/>
-        <InspectionForm clients={clients} onSubmit={this.handleInspectionSubmission} />
+        <InspectionForm
+          clients={clients}
+          selectedClientObjectID={selectedClientObjectID}
+          onChange={this.handleSelectClientValueChange}
+          onSubmit={this.handleInspectionSubmission}
+        />
       </div>
     );
   }
