@@ -16,18 +16,16 @@ const authorize = (req, res, next) => {
 
 router.get('/', authorize, (req, res) => {
 
-  Inspection.find()
-    .populate('worker')
-    .then(inspections => res.json(inspections))
+  Client.find()
+    .populate('inspection')
+    .then(clients => res.json(clients))
     .catch(error => res.json({ error }))
 });
 
 router.post('/', (req, res) => {
-  console.log(`request received at inspections/ endpoint ${res.body}`);
-  Inspection.create(req.body)
-    .then((inspection) => {
-      console.log(`inspection created ${inspection}`);
-      res.status(201).json(inspection).end();
+  Client.create(req.body)
+    .then((client) => {
+      res.status(201).json(client).end();
     })
     .catch(error => res.json({ error }))
 });

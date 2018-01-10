@@ -5,7 +5,6 @@ const ObjectId = Schema.Types.ObjectId;
 
 
 const clientSchema = Schema({
-  _id: ObjectId,
   name: String,
   address: String,
   contact_number: Number,

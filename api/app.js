@@ -15,6 +15,11 @@ app.use(bodyParser.json()); // support json encoded bodies
 const inspectionsRouter = require('./routes/inspections');
 app.use('/inspections', inspectionsRouter);
 
+const clientsRouter = require('./routes/clients');
+app.use('/clients', clientsRouter);
+
+const employeesRouter = require('./routes/employees');
+app.use('/employees', employeesRouter);
 
 app.get('/', verifyToken, (req, res) => {     //this is a callback
   res.json({
@@ -26,42 +31,6 @@ app.get('/', verifyToken, (req, res) => {     //this is a callback
 });
 
 
-
-//Verify token
-function verifyToken(req, res, next){
-  // //Get auth value
-  // const bearerHeader = req.headers['authorization'];
-  // //Check if bearer is undefined
-  // if (bearerHeader !== 'undefined'){
-  //   const bearer = bearerHeader.split(' ');
-  //   const bearerToken = bearer[1];
-  //   req.token = bearerToken;
-  //   // need to add here token verification
-  //   //if jwt
-
-
-    let token = req.body.token || req.query.token || req.headers['x-access-token'];
-    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
-
-    jwt.verify(token, config.secret, function(err, decoded) {
-      if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
-
-      res.status(200).send(decoded);
-    });
-
-
-  //   next();
-  // }
-  // else {
-  //   res.status(403).send({message: 'Forbidden'})
-  // }
-}
-
-
-
-
-
-
 app.get('/user', (req, res) => {
 
   User.find({}, (err, user) => {
@@ -69,8 +38,6 @@ app.get('/user', (req, res) => {
   })
 
 });
-
-
 
 
 app.post('/login', (req, res) => {
@@ -101,11 +68,7 @@ app.post('/login', (req, res) => {
 });
 
 
-
-
 app.post('/register', (req, res) => {
-  //var hashedPassword = bcrypt.hashSync(req.body.password, 8);
-  //const user = new User({
 
   User.create({
 
@@ -125,11 +88,42 @@ app.post('/register', (req, res) => {
         email: user.email
       });
   });
-  //req.user = user;
+  
 
+
+app.get('/', (req, res) => {     //this is a callback
+  res.json({
+    resources: [{
+      clients: '/clients'
+    }]
+  })
 });
 
+  
+  
+app.get('/', (req, res) => {     //this is a callback
+  res.json({
+    resources: [{
+      clients: '/employees'
+    }]
+  })
 
+});
+  
+
+//Verify token
+function verifyToken(req, res, next){
+ 
+    let token = req.body.token || req.query.token || req.headers['x-access-token'];
+    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+
+    jwt.verify(token, config.secret, function(err, decoded) {
+      if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
+
+      res.status(200).send(decoded);
+    });
+
+}
 
 
 module.exports = app

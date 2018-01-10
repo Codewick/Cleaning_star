@@ -12,6 +12,11 @@ export function save(inspection) {
     },
     body: JSON.stringify(inspection)
   })
-  .then(res => res.json())
-  .catch(error => { console.log(error) })
+  .then(res => {
+    console.log(`response from backend: ${JSON.stringify(res)}`);
+    res.json()
+  })
+  .catch(error => {
+    console.log(`response from backend error: ${error}`);
+  })
 }
