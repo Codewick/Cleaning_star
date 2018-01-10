@@ -88,7 +88,8 @@ app.post('/register', (req, res) => {
         email: user.email
       });
   });
-  
+});
+
 
 
 app.get('/', (req, res) => {     //this is a callback
@@ -99,8 +100,8 @@ app.get('/', (req, res) => {     //this is a callback
   })
 });
 
-  
-  
+
+
 app.get('/', (req, res) => {     //this is a callback
   res.json({
     resources: [{
@@ -109,11 +110,11 @@ app.get('/', (req, res) => {     //this is a callback
   })
 
 });
-  
+
 
 //Verify token
 function verifyToken(req, res, next){
- 
+
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
     if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
