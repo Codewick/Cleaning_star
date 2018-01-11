@@ -1,6 +1,7 @@
 import React, { Component } from 'react';
 import './App.css';
 import InspectionList from './components/InspectionList';
+import ClientList from './components/ClientList';
 import * as inspectionAPI from './api/inspections';
 import * as clientAPI from './api/clients';
 import InspectionForm from './components/InspectionForm';
@@ -72,6 +73,16 @@ class App extends Component {
           onChange={this.handleSelectClientValueChange}
           onSubmit={this.handleInspectionSubmission}
         />
+
+        {
+          clients ? (
+            <ClientList clients={ clients } />
+          ) : (
+            "Loading..."
+          )
+        }
+
+        <hr/>
         <ClientForm
           onSubmit={this.handleClientSubmission}
         />
