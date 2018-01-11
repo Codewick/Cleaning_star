@@ -4,6 +4,7 @@ import InspectionList from './components/InspectionList';
 import * as inspectionAPI from './api/inspections';
 import * as clientAPI from './api/clients';
 import InspectionForm from './components/InspectionForm';
+import ClientForm from './components/ClientForm';
 
 class App extends Component {
   state = {
@@ -41,6 +42,14 @@ class App extends Component {
     console.log(inspection);
     inspectionAPI.save(inspection);
   }
+
+  handleClientSubmission = (client) => {
+    this.setState(({ clients }) => (
+      {clients: [ client ].concat(clients) }
+    ));
+    clientAPI.save(client);
+  }
+
   render() {
     const { inspections, clients, selectedClientObjectID } = this.state;
 
@@ -62,6 +71,9 @@ class App extends Component {
           selectedClientObjectID={selectedClientObjectID}
           onChange={this.handleSelectClientValueChange}
           onSubmit={this.handleInspectionSubmission}
+        />
+        <ClientForm
+          onSubmit={this.handleClientSubmission}
         />
       </div>
     );
