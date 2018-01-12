@@ -1,13 +1,14 @@
 import React from 'react';
 
-export default function InspectionForm({ clients, selectedClientObjectID, onChange, onSubmit }) {
+export default function InspectionForm({ clients, employees, selectedClientObjectID, selectedEmployeeObjectID, onChange, onSubmit }) {
   function handleFormSubmission(event) {
     event.preventDefault();
     const { elements } = event.target;
     const auditor = elements["auditor"].value;
     const frequency = elements["frequency"].value;
     const client = elements["client"].value;
-    onSubmit({ auditor, frequency, client });
+    const employee = elements["employee"].value;
+    onSubmit({ auditor, frequency, client, employee });
   }
 
   function handleSelectClientValueChange(event) {
@@ -15,6 +16,13 @@ export default function InspectionForm({ clients, selectedClientObjectID, onChan
 
     onChange(event.target.value);
   }
+
+  function handleSelectEmployeeValueChange(event) {
+    console.log('handleValueChange occurred with event.target.value: ', event.target.value);
+
+    onChange(event.target.value);
+  }
+
 
   console.log(`in inspectionform, received list of clients from container component: `, clients);
 
@@ -33,6 +41,21 @@ export default function InspectionForm({ clients, selectedClientObjectID, onChan
     });
   };
 
+  function renderEmployeeOptions() {
+    return employees.map((employee, index) => {
+      // Note: ObjectID associated with Mongo object is returned from server as _id
+      if (selectedEmployeeObjectID) {
+        return (
+          <option value={employee._id} selected={ selectedEmployeeObjectID == employee._id ? "selected" : ""}>{employee.name}</option>
+        )
+      } else {
+        return (
+          <option value={employee._id} selected={ index == 0 ? "selected" : ""}>{employee.name}</option>
+        )
+      }
+    });
+  };
+
   return (
     <form onSubmit={handleFormSubmission} >
       <label>
@@ -46,6 +69,19 @@ export default function InspectionForm({ clients, selectedClientObjectID, onChan
           { clients ? renderClientOptions() : null }
         </select>
       </label>
+
+      <label>
+        worker
+        &nbsp;
+        <select id="selection-box-employee-options"
+                name="employee"
+                onChange={handleSelectEmployeeValueChange}
+                value={selectedEmployeeObjectID ? selectedEmployeeObjectID : ""} // Hack
+        >
+          { employees ? renderEmployeeOptions() : null }
+        </select>
+      </label>
+
       <label>
         Auditor
         &nbsp;
