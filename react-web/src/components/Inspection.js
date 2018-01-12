@@ -1,11 +1,14 @@
 import React from 'react';
 
 export default function Inspection(props) {
-  const { client, date, frequency, auditor, comments, worker } = props;
+  const { client, date, frequency, auditor, comments, employee } = props;
   return (
     <div className="inspection">
       <span>
         Client: {client}
+      </span>
+      <span>
+        worker: {employee}
       </span>
       <span>When: {date}</span>
       <span>Frequency: Every {frequency} weeks</span>
