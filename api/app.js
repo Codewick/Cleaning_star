@@ -115,7 +115,7 @@ app.get('/', (req, res) => {     //this is a callback
 
 
 
-Verify token
+//Verify token
 function verifyToken(req, res, next){
 
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
