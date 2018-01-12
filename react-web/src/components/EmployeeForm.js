@@ -5,18 +5,27 @@ export default function EmployeeForm({onSubmit}) {
     event.preventDefault();
     // event.preventPropagation();
     const {elements} = event.target;
-    const name = elements["name"].value;
+    const firstName = elements["firstName"].value;
+    const lastName = elements["lastName"].value;
     const contact_number = elements["contact_number"].value;
-    onSubmit({ name, contact_number })
+    onSubmit({ firstName, lastName, contact_number })
   }
 
   return (
     <form onSubmit={handleFormSubmission}>
 
       <label>
-        Name
+        First Name
         &nbsp;
-        <input type="text" name="name"/>
+        <input type="text" name="firstName"/>
+      </label>
+
+      &nbsp;
+
+      <label>
+        Last Name
+        &nbsp;
+        <input type="text" name="lastName"/>
       </label>
 
       &nbsp;
