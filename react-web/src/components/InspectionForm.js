@@ -23,11 +23,11 @@ export default function InspectionForm({ clients, selectedClientObjectID, onChan
       // Note: ObjectID associated with Mongo object is returned from server as _id
       if (selectedClientObjectID) {
         return (
-          <option value={client._id} selected={ selectedClientObjectID == client._id ? "selected" : ""}>{client.name}</option>
+          <option value={client._id} selected={ selectedClientObjectID === client._id ? "selected" : ""}>{client.name}</option>
         )
       } else {
         return (
-          <option value={client._id} selected={ index == 0 ? "selected" : ""}>{client.name}</option>
+          <option value={client._id} selected={ index === 0 ? "selected" : ""}>{client.name}</option>
         )
       }
     });

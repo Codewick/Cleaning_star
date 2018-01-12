@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
 import InspectionList from './components/InspectionList';
+import ClientList from './components/ClientList';
 import * as inspectionAPI from './api/inspections';
 import * as clientAPI from './api/clients';
 import InspectionForm from './components/InspectionForm';
+import ClientForm from './components/ClientForm';
 
 class App extends Component {
   state = {
@@ -41,6 +43,14 @@ class App extends Component {
     console.log(inspection);
     inspectionAPI.save(inspection);
   }
+
+  handleClientSubmission = (client) => {
+    this.setState(({ clients }) => (
+      {clients: [ client ].concat(clients) }
+    ));
+    clientAPI.save(client);
+  }
+
   render() {
     const { inspections, clients, selectedClientObjectID } = this.state;
 
@@ -62,6 +72,19 @@ class App extends Component {
           selectedClientObjectID={selectedClientObjectID}
           onChange={this.handleSelectClientValueChange}
           onSubmit={this.handleInspectionSubmission}
+        />
+
+        {
+          clients ? (
+            <ClientList clients={ clients } />
+          ) : (
+            "Loading..."
+          )
+        }
+
+        <hr/>
+        <ClientForm
+          onSubmit={this.handleClientSubmission}
         />
       </div>
     );
