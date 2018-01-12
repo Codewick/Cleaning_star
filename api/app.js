@@ -87,7 +87,8 @@ app.post('/register', (req, res) => {
         id:user._id,
         email: user.email
       });
- });
+
+  });
 });
 
 
@@ -110,6 +111,7 @@ app.get('/', (req, res) => {     //this is a callback
   })
 
 });
+
 
 
 Verify token
