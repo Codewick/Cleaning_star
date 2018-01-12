@@ -7,11 +7,14 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import InspectionList from './components/InspectionList';
+import ClientList from './components/ClientList';
 import * as inspectionAPI from './api/inspections';
 import * as clientAPI from './api/clients';
 import * as employeeAPI from './api/employees';
 import InspectionForm from './components/InspectionForm';
 import InspectionPage from './pages/InspectionPage';
+import ClientForm from './components/ClientForm';
+
 
 class App extends Component {
   state = {
@@ -65,6 +68,14 @@ class App extends Component {
     console.log(inspection);
     inspectionAPI.save(inspection);
   }
+
+  handleClientSubmission = (client) => {
+    this.setState(({ clients }) => (
+      {clients: [ client ].concat(clients) }
+    ));
+    clientAPI.save(client);
+  }
+
   render() {
     const { inspections, clients, selectedClientObjectID, selectedEmployeeObjectID, employees } = this.state;
 
@@ -102,6 +113,29 @@ class App extends Component {
             </Switch>
           </div>
       </Router>
+
+        <hr/>
+        <InspectionForm
+          clients={clients}
+          selectedClientObjectID={selectedClientObjectID}
+          onChange={this.handleSelectClientValueChange}
+          onSubmit={this.handleInspectionSubmission}
+        />
+
+        {
+          clients ? (
+            <ClientList clients={ clients } />
+          ) : (
+            "Loading..."
+          )
+        }
+
+        <hr/>
+        <ClientForm
+          onSubmit={this.handleClientSubmission}
+        />
+      </div>
+
     );
   }
 }
