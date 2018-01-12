@@ -14,6 +14,7 @@ import * as employeeAPI from './api/employees';
 import InspectionForm from './components/InspectionForm';
 import InspectionPage from './pages/InspectionPage';
 import ClientForm from './components/ClientForm';
+import ClientPage from './pages/ClientPage';
 
 
 class App extends Component {
@@ -88,6 +89,8 @@ class App extends Component {
                 <Link to='/inspections/new'>Add Inspection</Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <Link to='/inspections'>Show Inspections</Link>
+                <Link to='/clients/new'>Add Client</Link>
+                <Link to='/clients'>Show Clients</Link>
             </nav>
             <hr/>
             <Switch>
@@ -110,31 +113,23 @@ class App extends Component {
                 )
               }/>
 
+              <Route path='/clients/new' render={() => (
+                <ClientForm
+                  onSubmit={this.handleClientSubmission}
+                />
+              )
+              }/>
+
+              <Route path='/clients' render={() => (
+               <ClientPage clients={clients}/>
+                )
+              }/>
+
+
+
             </Switch>
           </div>
       </Router>
-
-        <hr/>
-        <InspectionForm
-          clients={clients}
-          selectedClientObjectID={selectedClientObjectID}
-          onChange={this.handleSelectClientValueChange}
-          onSubmit={this.handleInspectionSubmission}
-        />
-
-        {
-          clients ? (
-            <ClientList clients={ clients } />
-          ) : (
-            "Loading..."
-          )
-        }
-
-        <hr/>
-        <ClientForm
-          onSubmit={this.handleClientSubmission}
-        />
-      </div>
 
     );
   }

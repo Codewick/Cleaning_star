@@ -1,17 +1,5 @@
 import React from 'react';
-
-function Client(props) {
-  const { name, address, contact_number, e_mail, contact_person } = props;
-  return (
-    <div className="client">
-      <span>Name: {name}</span>
-      <span>Address: {address}</span>
-      <span>Contact Phone: {contact_number}</span>
-      <span>Email: {e_mail}</span>
-      <span>Contact Person: {contact_person}</span>
-    </div>
-  )
-}
+import Client from './Client';
 
 export default function ClientList({ clients }) {
   return (
