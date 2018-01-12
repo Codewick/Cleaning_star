@@ -7,7 +7,7 @@ export default function EmployeeList({ employees }) {
       <h1>Employee List</h1>
       {
         employees.map(employee => (
-          <Employee key={employee._id} {...employees}/>
+          <Employee key={employee._id} {...employee}/>
         ))
       }
     </div>
