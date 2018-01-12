@@ -5,8 +5,7 @@ const ObjectId = Schema.Types.ObjectId;
 
 const employeeSchema = Schema({
   name: String,
-  contact_number: Number,
-  e_mail: String,
+  contact_number: Number
   //inspections: [{ type: ObjectId, ref: 'Inspection'}]
 });
 
