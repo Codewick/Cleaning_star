@@ -8,6 +8,7 @@ import {
 import './App.css';
 import InspectionList from './components/InspectionList';
 import ClientList from './components/ClientList';
+import EmployeeList from './components/EmployeeList';
 import * as inspectionAPI from './api/inspections';
 import * as clientAPI from './api/clients';
 import * as employeeAPI from './api/employees';
@@ -15,6 +16,9 @@ import InspectionForm from './components/InspectionForm';
 import InspectionPage from './pages/InspectionPage';
 import ClientForm from './components/ClientForm';
 import ClientPage from './pages/ClientPage';
+import EmployeeForm from './components/EmployeeForm';
+import EmployeePage from './pages/EmployeePage';
+
 
 
 class App extends Component {
@@ -77,6 +81,13 @@ class App extends Component {
     clientAPI.save(client);
   }
 
+  handleEmployeeSubmission = (employee) => {
+    this.setState(({ employees }) => (
+      {employees: [ employee ].concat(employees) }
+    ));
+    employeeAPI.save(employee);
+  }
+
   render() {
     const { inspections, clients, selectedClientObjectID, selectedEmployeeObjectID, employees } = this.state;
 
@@ -91,6 +102,10 @@ class App extends Component {
                 <Link to='/inspections'>Show Inspections</Link>
                 <Link to='/clients/new'>Add Client</Link>
                 <Link to='/clients'>Show Clients</Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <Link to='/employees/new'>Add Employees</Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <Link to='/employees'>Show Employees</Link>
             </nav>
             <hr/>
             <Switch>
@@ -117,13 +132,28 @@ class App extends Component {
                 <ClientForm
                   onSubmit={this.handleClientSubmission}
                 />
-              )
+                )
               }/>
 
               <Route path='/clients' render={() => (
                <ClientPage clients={clients}/>
                 )
               }/>
+
+              // employees
+              <Route path='/employees/new' render={() => (
+                <EmployeeForm
+                  onSubmit={this.handleEmployeeSubmission}
+                />
+                )
+              }/>
+
+              <Route path='/employees' render={() => (
+               <EmployeePage employees={employees}/>
+                )
+              }/>
+
+
 
 
 
