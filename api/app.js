@@ -87,9 +87,7 @@ app.post('/register', (req, res) => {
         id:user._id,
         email: user.email
       });
-
   });
-
 });
 
 
@@ -130,4 +128,4 @@ function verifyToken(req, res, next){
 }
 
 
-module.exports = app;
+module.exports = app
