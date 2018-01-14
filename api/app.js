@@ -21,6 +21,10 @@ app.use('/clients', clientsRouter);
 const employeesRouter = require('./routes/employees');
 app.use('/employees', employeesRouter);
 
+const usersRouter = require('./routes/users');
+app.use('/register', usersRouter);
+
+
 app.get('/', verifyToken, (req, res) => {     //this is a callback
   res.json({
     message: 'Welcome to the index page',
@@ -67,28 +71,14 @@ app.post('/login', (req, res) => {
 
 });
 
-
-app.post('/register', (req, res) => {
-
-  User.create({
-
-    firstName: req.body.firstName,
-    lastName: req.body.lastName,
-    email: req.body.email,
-    password: req.body.password //hashedPassword
-  },
-    (err,user) => {
-      console.log(`err, user: `, err, user)
-
-      if(err) return res.status(500).send("There was a problem registering the user.")
-
-      res.json({
-        message: "User succesfully created.",
-        id:user._id,
-        email: user.email
-      });
-  });
+app.get('/', (req, res) => {     //this is a callback
+  res.json({
+    resources: [{
+      clients: '/register'
+    }]
+  })
 });
+
 
 
 
