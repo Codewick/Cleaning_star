@@ -56,7 +56,9 @@ export default function ClientForm({onSubmit}) {
 
       &nbsp;
 
-      <button type="submit">Add Client</button>
+      <button className="btn waves-effect waves-light orange darken-2" type="submit">
+        Add Client<i className="material-icons right">send</i>
+      </button>
 
     </form>
   )

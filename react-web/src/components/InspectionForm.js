@@ -94,7 +94,9 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
         <input type="number" name="frequency"/>
       </label>
       &nbsp;
-      <button type="submit">Create Inspection</button>
+      <button className="btn waves-effect waves-light orange darken-2" type="submit">
+        Create Inspection<i className="material-icons right">send</i>
+      </button>
     </form>
   )
 }

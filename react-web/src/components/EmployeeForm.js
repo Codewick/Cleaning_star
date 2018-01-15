@@ -38,7 +38,9 @@ export default function EmployeeForm({onSubmit}) {
 
       &nbsp;
 
-      <button type="submit">Add Employee</button>
+      <button className="btn waves-effect waves-light orange darken-2" type="submit">
+        Add Employee<i className="material-icons right">send</i>
+      </button>
 
     </form>
   )
