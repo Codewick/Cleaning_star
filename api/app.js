@@ -10,7 +10,7 @@ const User = require('./models/user')
 const app = express();
 
 app.use(bodyParser.json()); // support json encoded bodies
-   app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
 
 const inspectionsRouter = require('./routes/inspections');
 app.use('/inspections', inspectionsRouter);
@@ -22,7 +22,7 @@ const employeesRouter = require('./routes/employees');
 app.use('/employees', employeesRouter);
 
 const usersRouter = require('./routes/users');
-app.use('/register', usersRouter);
+app.use('/user/new', usersRouter);
 
 
 app.get('/', verifyToken, (req, res) => {     //this is a callback
@@ -70,16 +70,6 @@ app.post('/login', (req, res) => {
     });
 
 });
-
-app.get('/', (req, res) => {     //this is a callback
-  res.json({
-    resources: [{
-      clients: '/register'
-    }]
-  })
-});
-
-
 
 
 app.get('/', (req, res) => {     //this is a callback
