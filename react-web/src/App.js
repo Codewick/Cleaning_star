@@ -96,40 +96,35 @@ class App extends Component {
       return (
         <Router>
           <div className="App">
-            // <nav>
-            //     <Link to='/inspections/new'>Add Inspection</Link>
-            //     &nbsp;&nbsp;&nbsp;&nbsp;
-            //     <Link to='/inspections'>Show Inspections</Link>
-            //     &nbsp;&nbsp;&nbsp;&nbsp;
-            //     <Link to='/clients/new'>Add Client</Link>
-            //     &nbsp;&nbsp;&nbsp;&nbsp;
-            //     <Link to='/clients'>Show Clients</Link>
-            //     &nbsp;&nbsp;&nbsp;&nbsp;
-            //     <Link to='/employees/new'>Add Employees</Link>
-            //     &nbsp;&nbsp;&nbsp;&nbsp;
-            //     <Link to='/employees'>Show Employees</Link>
-            // </nav>
 
-            <nav>
-                <div class="nav-wrapper">
-                  <a href="#!" class="brand-logo">Logo</a>
-                  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
-                  <ul class="right hide-on-med-and-down">
-                    <li><a href="sass.html">Sass</a></li>
-                    <li><a href="badges.html">Components</a></li>
-                    <li><a href="collapsible.html">Javascript</a></li>
-                    <li><a href="mobile.html">Mobile</a></li>
+            <div className="navbar-fixed">
+              <nav>
+                <div className="nav-wrapper container">
+                  <div className="logo"><a href="#!" className="brand-logo">Logo</a></div>
+                  <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
+                  {/* This ul will disappear when the screen becomes too small */}
+                  <ul className="right hide-on-med-and-down">
+                    <li><Link to='/inspections/new'>Add Inspection</Link></li>
+                    <li><Link to='/inspections'>Show Inspections</Link></li>
+                    <li><Link to='/clients/new'>Add Client</Link></li>
+                    <li><Link to='/clients'>Show Clients</Link></li>
+                    <li><Link to='/employees/new'>Add Employees</Link></li>
+                    <li><Link to='/employees'>Show Employees</Link></li>
                   </ul>
-                  <ul class="side-nav" id="mobile-demo">
-                    <li><a href="sass.html">Sass</a></li>
-                    <li><a href="badges.html">Components</a></li>
-                    <li><a href="collapsible.html">Javascript</a></li>
-                    <li><a href="mobile.html">Mobile</a></li>
-                  </ul>
-                </div>
+                </div> {/* end nav-wrapper container div */}
               </nav>
+            </div> {/* end navbar-fixed div */}
+            {/* we need to put the side-nav ul outside of the nav to get both fixed-navbar and hamburger to work together */}
+            <ul className="right side-nav" id="mobile-demo">
+              <li><Link to='/inspections/new'>Add Inspection</Link></li>
+              <li><Link to='/inspections'>Show Inspections</Link></li>
+              <li><Link to='/clients/new'>Add Client</Link></li>
+              <li><Link to='/clients'>Show Clients</Link></li>
+              <li><Link to='/employees/new'>Add Employees</Link></li>
+              <li><Link to='/employees'>Show Employees</Link></li>
+            </ul>
 
-            <hr/>
+
             <Switch>
 
               <Route path='/inspections/new' render={() => (
