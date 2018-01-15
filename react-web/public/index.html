@@ -25,6 +25,14 @@
   	<link href="http://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
   	<!-- Import materialize.css -->
   	<link href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/css/materialize.min.css" rel="stylesheet">
+    <script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
+
+    <!-- This script is required for hamburger menu -->
+    <script>
+    $( document ).ready(function() {
+          $(".button-collapse").sideNav();
+        });
+    </script>
   </head>
   <body>
     <noscript>
@@ -42,8 +50,6 @@
       To create a production bundle, use `npm run build` or `yarn build`.
     -->
 
-    <!-- Import jQuery before materialize.js -->
-  	<script src="https://code.jquery.com/jquery-2.1.1.min.js"></script>
   	<script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.98.0/js/materialize.min.js"></script>
   	<!-- And then your bundled js -->
   	<script src="path/to/your/bundle.js"></script>

@@ -96,19 +96,39 @@ class App extends Component {
       return (
         <Router>
           <div className="App">
+            // <nav>
+            //     <Link to='/inspections/new'>Add Inspection</Link>
+            //     &nbsp;&nbsp;&nbsp;&nbsp;
+            //     <Link to='/inspections'>Show Inspections</Link>
+            //     &nbsp;&nbsp;&nbsp;&nbsp;
+            //     <Link to='/clients/new'>Add Client</Link>
+            //     &nbsp;&nbsp;&nbsp;&nbsp;
+            //     <Link to='/clients'>Show Clients</Link>
+            //     &nbsp;&nbsp;&nbsp;&nbsp;
+            //     <Link to='/employees/new'>Add Employees</Link>
+            //     &nbsp;&nbsp;&nbsp;&nbsp;
+            //     <Link to='/employees'>Show Employees</Link>
+            // </nav>
+
             <nav>
-                <Link to='/inspections/new'>Add Inspection</Link>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <Link to='/inspections'>Show Inspections</Link>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <Link to='/clients/new'>Add Client</Link>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <Link to='/clients'>Show Clients</Link>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <Link to='/employees/new'>Add Employees</Link>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <Link to='/employees'>Show Employees</Link>
-            </nav>
+                <div class="nav-wrapper">
+                  <a href="#!" class="brand-logo">Logo</a>
+                  <a href="#" data-activates="mobile-demo" class="button-collapse"><i class="material-icons">menu</i></a>
+                  <ul class="right hide-on-med-and-down">
+                    <li><a href="sass.html">Sass</a></li>
+                    <li><a href="badges.html">Components</a></li>
+                    <li><a href="collapsible.html">Javascript</a></li>
+                    <li><a href="mobile.html">Mobile</a></li>
+                  </ul>
+                  <ul class="side-nav" id="mobile-demo">
+                    <li><a href="sass.html">Sass</a></li>
+                    <li><a href="badges.html">Components</a></li>
+                    <li><a href="collapsible.html">Javascript</a></li>
+                    <li><a href="mobile.html">Mobile</a></li>
+                  </ul>
+                </div>
+              </nav>
+
             <hr/>
             <Switch>
 
