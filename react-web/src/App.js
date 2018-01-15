@@ -115,11 +115,14 @@ class App extends Component {
               </nav>
             </div> {/* end navbar-fixed div */}
             {/* we need to put the side-nav ul outside of the nav to get both fixed-navbar and hamburger to work together */}
-            <ul className="right side-nav" id="mobile-demo">
+            <ul className="side-nav" id="mobile-demo">
+              <li className="grey lighten-3">Inspections</li>
               <li><Link to='/inspections/new'>Add Inspection</Link></li>
               <li><Link to='/inspections'>Show Inspections</Link></li>
+              <li className="grey lighten-3">Clients</li>
               <li><Link to='/clients/new'>Add Client</Link></li>
               <li><Link to='/clients'>Show Clients</Link></li>
+              <li className="grey lighten-3">Employees</li>
               <li><Link to='/employees/new'>Add Employees</Link></li>
               <li><Link to='/employees'>Show Employees</Link></li>
             </ul>
