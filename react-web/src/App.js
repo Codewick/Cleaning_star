@@ -98,10 +98,10 @@ class App extends Component {
           <div className="App">
 
             <div className="navbar-fixed">
-              <nav>
+              <nav className="orange darken-2">
                 <div className="nav-wrapper container">
                   <div className="logo"><a href="#!" className="brand-logo">Logo</a></div>
-                  <a href="#" data-activates="mobile-demo" className="button-collapse"><i className="material-icons">menu</i></a>
+                  <a href="#" data-activates="mobile-demo" className="button-collapse right"><i className="material-icons">menu</i></a>
                   {/* This ul will disappear when the screen becomes too small */}
                   <ul className="right hide-on-med-and-down">
                     <li><Link to='/inspections/new'>Add Inspection</Link></li>
