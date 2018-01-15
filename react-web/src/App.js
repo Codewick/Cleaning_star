@@ -100,7 +100,9 @@ class App extends Component {
                 <Link to='/inspections/new'>Add Inspection</Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <Link to='/inspections'>Show Inspections</Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 <Link to='/clients/new'>Add Client</Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;
                 <Link to='/clients'>Show Clients</Link>
                 &nbsp;&nbsp;&nbsp;&nbsp;
                 <Link to='/employees/new'>Add Employees</Link>
