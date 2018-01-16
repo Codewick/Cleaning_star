@@ -7,7 +7,9 @@ export default function InspectionList({ inspections }) {
       <h1>Inspection List</h1>
       {
         inspections.map(inspection => (
-          <Inspection key={inspection._id} {...inspection}/>
+          <div className="card blue-grey">
+            <Inspection key={inspection._id} {...inspection}/>
+          </div>
         ))
       }
     </div>
