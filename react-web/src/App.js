@@ -1,11 +1,17 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
+<<<<<<< Updated upstream
+  Route,
+  Switch
+=======
  Route,
  Link,
  Switch
+>>>>>>> Stashed changes
 } from 'react-router-dom';
 import './App.css';
+import Nav from './components/Nav';
 import InspectionList from './components/InspectionList';
 import ClientList from './components/ClientList';
 import EmployeeList from './components/EmployeeList';
@@ -14,12 +20,14 @@ import * as clientAPI from './api/clients';
 import * as employeeAPI from './api/employees';
 import InspectionForm from './components/InspectionForm';
 import InspectionPage from './pages/InspectionPage';
+<<<<<<< Updated upstream
 import ClientForm from './components/ClientForm';
 import ClientPage from './pages/ClientPage';
 import EmployeeForm from './components/EmployeeForm';
 import EmployeePage from './pages/EmployeePage';
 
-
+=======
+>>>>>>> Stashed changes
 
 class App extends Component {
   state = {
@@ -30,11 +38,23 @@ class App extends Component {
    }
 
   componentDidMount() {
-      inspectionAPI.all()
-        .then(inspections => {
-          this.setState({ inspections })
-        })
+    inspectionAPI.all()
+      .then(inspections => {
+        this.setState({ inspections })
+      })
 
+    clientAPI.all()
+      .then(clients => {
+        this.setState({ clients })
+      })
+
+<<<<<<< Updated upstream
+    employeeAPI.all()
+      .then(employees => {
+        this.setState({ employees })
+      })
+  }
+=======
       clientAPI.all()
         .then(clients => {
           this.setState({ clients })
@@ -45,6 +65,7 @@ class App extends Component {
             this.setState({ employees })
           })
     }
+>>>>>>> Stashed changes
 
   handleSelectClientValueChange = (selectedClientObjectID) => {
     console.log(`selectedClientObjectID: `, selectedClientObjectID);
@@ -96,38 +117,18 @@ class App extends Component {
       return (
         <Router>
           <div className="App">
+<<<<<<< Updated upstream
 
-            <div className="navbar-fixed">
-              <nav className="orange darken-2">
-                <div className="nav-wrapper container">
-                  <div className="logo"><a href="#!" className="brand-logo">Logo</a></div>
-                  <a href="#" data-activates="mobile-demo" className="button-collapse right"><i className="material-icons">menu</i></a>
-                  {/* This ul will disappear when the screen becomes too small */}
-                  <ul className="right hide-on-med-and-down">
-                    <li><Link to='/inspections/new'>Add Inspection</Link></li>
-                    <li><Link to='/inspections'>Show Inspections</Link></li>
-                    <li><Link to='/clients/new'>Add Client</Link></li>
-                    <li><Link to='/clients'>Show Clients</Link></li>
-                    <li><Link to='/employees/new'>Add Employees</Link></li>
-                    <li><Link to='/employees'>Show Employees</Link></li>
-                  </ul>
-                </div> {/* end nav-wrapper container div */}
-              </nav>
-            </div> {/* end navbar-fixed div */}
-            {/* we need to put the side-nav ul outside of the nav to get both fixed-navbar and hamburger to work together */}
-            <ul className="side-nav" id="mobile-demo">
-              <li className="grey lighten-3">Inspections</li>
-              <li><Link to='/inspections/new'>Add Inspection</Link></li>
-              <li><Link to='/inspections'>Show Inspections</Link></li>
-              <li className="grey lighten-3">Clients</li>
-              <li><Link to='/clients/new'>Add Client</Link></li>
-              <li><Link to='/clients'>Show Clients</Link></li>
-              <li className="grey lighten-3">Employees</li>
-              <li><Link to='/employees/new'>Add Employees</Link></li>
-              <li><Link to='/employees'>Show Employees</Link></li>
-            </ul>
+            <Nav />
 
-
+=======
+            <nav>
+                <Link to='/inspections/new'>Add Inspection</Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <Link to='/inspections'>Show Inspections</Link>
+            </nav>
+            <hr/>
+>>>>>>> Stashed changes
             <Switch>
 
               <Route path='/inspections/new' render={() => (
@@ -136,6 +137,40 @@ class App extends Component {
                   employees={employees}
                   selectedClientObjectID={selectedClientObjectID}
                   selectedEmployeeObjectID={selectedEmployeeObjectID}
+<<<<<<< Updated upstream
+                  onClientValueChange={this.handleSelectClientValueChange}
+                  onEmployeeValueChange={this.handleSelectEmployeeValueChange}
+                  onSubmit={this.handleInspectionSubmission}
+                />
+              )}/>
+
+              <Route path='/inspections' render={() => (
+               <InspectionPage inspections={inspections} clients={clients} employees={employees} />
+              )}/>
+
+              <Route path='/clients/new' render={() => (
+                <ClientForm onSubmit={this.handleClientSubmission} />
+              )}/>
+
+              <Route path='/clients' render={() => (
+               <ClientPage clients={clients}/>
+              )}/>
+
+              // employees
+              <Route path='/employees/new' render={() => (
+                <EmployeeForm onSubmit={this.handleEmployeeSubmission} />
+                )
+              }/>
+
+              <Route path='/employees' render={() => (
+                <EmployeePage employees={employees}/>
+              )}/>
+
+            </Switch>
+          </div>
+      </Router>
+
+=======
                   onChange={this.handleSelectClientValueChange}
                   onChange={this.handleSelectEmployeeValueChange}
                   onSubmit={this.handleInspectionSubmission}
@@ -148,39 +183,10 @@ class App extends Component {
                 )
               }/>
 
-              <Route path='/clients/new' render={() => (
-                <ClientForm
-                  onSubmit={this.handleClientSubmission}
-                />
-                )
-              }/>
-
-              <Route path='/clients' render={() => (
-               <ClientPage clients={clients}/>
-                )
-              }/>
-
-              // employees
-              <Route path='/employees/new' render={() => (
-                <EmployeeForm
-                  onSubmit={this.handleEmployeeSubmission}
-                />
-                )
-              }/>
-
-              <Route path='/employees' render={() => (
-               <EmployeePage employees={employees}/>
-                )
-              }/>
-
-
-
-
-
             </Switch>
           </div>
       </Router>
-
+>>>>>>> Stashed changes
     );
   }
 }
