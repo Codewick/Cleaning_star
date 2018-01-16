@@ -61,7 +61,8 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
       <label>
         Client
         &nbsp;
-        <select id="selection-box-client-options"
+        <select class="browser-default"
+                id="selection-box-client-options"
                 name="client"
                 onChange={handleSelectClientValueChange}
                 value={selectedClientObjectID ? selectedClientObjectID : ""} // Hack
@@ -70,10 +71,14 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
         </select>
       </label>
 
+
+
+
       <label>
         worker
         &nbsp;
-        <select id="selection-box-employee-options"
+        <select class="browser-default"
+                id="selection-box-employee-options"
                 name="employee"
                 onChange={handleSelectEmployeeValueChange}
                 value={selectedEmployeeObjectID ? selectedEmployeeObjectID : ""} // Hack
@@ -94,7 +99,9 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
         <input type="number" name="frequency"/>
       </label>
       &nbsp;
-      <button type="submit">Create Inspection</button>
+      <button className="btn waves-effect waves-light orange darken-2" type="submit">
+        Create Inspection<i className="material-icons right">send</i>
+      </button>
     </form>
   )
 }
