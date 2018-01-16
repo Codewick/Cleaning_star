@@ -30,3 +30,17 @@
   from { transform: rotate(0deg); }
   to { transform: rotate(360deg); }
 }
+
+/*main page*/
+body {
+  background-color: #eeeeee;
+}
+
+/*employee list*/
+.employee-box {
+  height: 100px;
+}
+
+.employee-list-item {
+  padding-top: 20px;
+}
