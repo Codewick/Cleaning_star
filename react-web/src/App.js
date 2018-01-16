@@ -1,8 +1,14 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
+<<<<<<< Updated upstream
   Route,
   Switch
+=======
+ Route,
+ Link,
+ Switch
+>>>>>>> Stashed changes
 } from 'react-router-dom';
 import './App.css';
 import Nav from './components/Nav';
@@ -14,11 +20,14 @@ import * as clientAPI from './api/clients';
 import * as employeeAPI from './api/employees';
 import InspectionForm from './components/InspectionForm';
 import InspectionPage from './pages/InspectionPage';
+<<<<<<< Updated upstream
 import ClientForm from './components/ClientForm';
 import ClientPage from './pages/ClientPage';
 import EmployeeForm from './components/EmployeeForm';
 import EmployeePage from './pages/EmployeePage';
 
+=======
+>>>>>>> Stashed changes
 
 class App extends Component {
   state = {
@@ -39,11 +48,24 @@ class App extends Component {
         this.setState({ clients })
       })
 
+<<<<<<< Updated upstream
     employeeAPI.all()
       .then(employees => {
         this.setState({ employees })
       })
   }
+=======
+      clientAPI.all()
+        .then(clients => {
+          this.setState({ clients })
+        })
+
+        employeeAPI.all()
+          .then(employees => {
+            this.setState({ employees })
+          })
+    }
+>>>>>>> Stashed changes
 
   handleSelectClientValueChange = (selectedClientObjectID) => {
     console.log(`selectedClientObjectID: `, selectedClientObjectID);
@@ -95,9 +117,18 @@ class App extends Component {
       return (
         <Router>
           <div className="App">
+<<<<<<< Updated upstream
 
             <Nav />
 
+=======
+            <nav>
+                <Link to='/inspections/new'>Add Inspection</Link>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <Link to='/inspections'>Show Inspections</Link>
+            </nav>
+            <hr/>
+>>>>>>> Stashed changes
             <Switch>
 
               <Route path='/inspections/new' render={() => (
@@ -106,6 +137,7 @@ class App extends Component {
                   employees={employees}
                   selectedClientObjectID={selectedClientObjectID}
                   selectedEmployeeObjectID={selectedEmployeeObjectID}
+<<<<<<< Updated upstream
                   onClientValueChange={this.handleSelectClientValueChange}
                   onEmployeeValueChange={this.handleSelectEmployeeValueChange}
                   onSubmit={this.handleInspectionSubmission}
@@ -138,6 +170,23 @@ class App extends Component {
           </div>
       </Router>
 
+=======
+                  onChange={this.handleSelectClientValueChange}
+                  onChange={this.handleSelectEmployeeValueChange}
+                  onSubmit={this.handleInspectionSubmission}
+                />
+              )
+              }/>
+
+              <Route path='/inspections' render={() => (
+               <InspectionPage inspections={inspections}/>
+                )
+              }/>
+
+            </Switch>
+          </div>
+      </Router>
+>>>>>>> Stashed changes
     );
   }
 }

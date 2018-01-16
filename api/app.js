@@ -87,7 +87,11 @@ app.post('/register', (req, res) => {
         id:user._id,
         email: user.email
       });
+<<<<<<< Updated upstream
   });
+=======
+ });
+>>>>>>> Stashed changes
 });
 
 
@@ -110,10 +114,14 @@ app.get('/', (req, res) => {     //this is a callback
   })
 
 });
+<<<<<<< Updated upstream
 
 
+=======
+>>>>>>> Stashed changes
 
-//Verify token
+
+Verify token
 function verifyToken(req, res, next){
 
     let token = req.body.token || req.query.token || req.headers['x-access-token'];
@@ -128,4 +136,4 @@ function verifyToken(req, res, next){
 }
 
 
-module.exports = app
+module.exports = app;
