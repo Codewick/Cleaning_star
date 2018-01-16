@@ -50,7 +50,7 @@ export default function ClientForm({onSubmit}) {
           <div className="col m2"></div>
             <div className="input-field col s12 m8">
               <input id="client_email" name="e_mail" type="text" className="validate"/>
-              <label for="client_email">Contact number</label>
+              <label for="client_email">Contact Email</label>
             </div>
           <div className="col m2"></div>
         </div>
