@@ -1,3 +1,12 @@
+
+function setToken(token) {
+  if (token) {
+    localStorage.setItem('token', token)
+  } else {
+    localStorage.removeItem('token')
+  }
+}
+
 export function loginAPI(email,password) {
   console.log("data to be fetched on API", { email,password })
   return fetch('/login', {
@@ -16,7 +25,10 @@ export function loginAPI(email,password) {
     console.log(res)
     return res.json()
   })
-
+.then(json => {
+  if (json){ setToken(json['token'])}
+  return json
+})
 
 
 
