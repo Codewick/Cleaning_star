@@ -1,10 +1,8 @@
 import React from 'react';
 
-<<<<<<< Updated upstream
+
 export default function InspectionForm({ clients, employees, selectedClientObjectID, selectedEmployeeObjectID, onClientValueChange, onEmployeeValueChange, onSubmit }) {
-=======
-export default function InspectionForm({ clients, employees, selectedClientObjectID, selectedEmployeeObjectID, onChange, onSubmit }) {
->>>>>>> Stashed changes
+
   function handleFormSubmission(event) {
     event.preventDefault();
     const { elements } = event.target;
@@ -12,12 +10,8 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
     const frequency = elements["frequency"].value;
     const client = elements["client"].value;
     const employee = elements["employee"].value;
-<<<<<<< Updated upstream
     const date = elements["date"].value;
     onSubmit({ auditor, frequency, client, employee, date });
-=======
-    onSubmit({ auditor, frequency, client, employee });
->>>>>>> Stashed changes
   }
 
   function handleSelectClientValueChange(event) {
@@ -29,11 +23,7 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
   function handleSelectEmployeeValueChange(event) {
     console.log('handleValueChange occurred with event.target.value: ', event.target.value);
 
-<<<<<<< Updated upstream
     onEmployeeValueChange(event.target.value);
-=======
-    onChange(event.target.value);
->>>>>>> Stashed changes
   }
 
 
@@ -102,12 +92,8 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
       <label>
         worker
         &nbsp;
-<<<<<<< Updated upstream
         <select class="browser-default"
                 id="selection-box-employee-options"
-=======
-        <select id="selection-box-employee-options"
->>>>>>> Stashed changes
                 name="employee"
                 onChange={handleSelectEmployeeValueChange}
                 value={selectedEmployeeObjectID ? selectedEmployeeObjectID : ""} // Hack

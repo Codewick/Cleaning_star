@@ -10,10 +10,7 @@ const inspectionSchema = Schema({
   frequency: Number,
   auditor: String,
   comments: String,
-<<<<<<< Updated upstream
   date: Date,
-=======
->>>>>>> Stashed changes
   employee: { type: ObjectId, ref: 'Employee'}
 });
 
