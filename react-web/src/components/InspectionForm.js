@@ -61,7 +61,8 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
       <label>
         Client
         &nbsp;
-        <select id="selection-box-client-options"
+        <select class="browser-default"
+                id="selection-box-client-options"
                 name="client"
                 onChange={handleSelectClientValueChange}
                 value={selectedClientObjectID ? selectedClientObjectID : ""} // Hack
@@ -73,7 +74,8 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
       <label>
         worker
         &nbsp;
-        <select id="selection-box-employee-options"
+        <select class="browser-default"
+                id="selection-box-employee-options"
                 name="employee"
                 onChange={handleSelectEmployeeValueChange}
                 value={selectedEmployeeObjectID ? selectedEmployeeObjectID : ""} // Hack
