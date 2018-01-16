@@ -3,6 +3,9 @@ const User = require('../models/user');
 
 const router = express.Router();
 
+
+
+//New user
 // Registers a user and returns the user that was created as hash.
 // Note that token generation only occurs when the user performs login (not registration)
 // localhost:7000/register
@@ -18,13 +21,6 @@ router.post('/', (req, res) => {
       console.log(`error (if any): `, err)
       console.log(`user: `, user)
 
-      // return;
-      // if (err) {
-      //   res.status(500).send("There was a problem registering the user.")
-      // } else {
-      //   res.status(200).send("User succesfully created.");
-      // }
-
       if(err) return res.status(500).send("There was a problem registering the user.")
 
       res.json({
@@ -37,6 +33,8 @@ router.post('/', (req, res) => {
 
   });
 });
+
+
 
 
 module.exports = router;

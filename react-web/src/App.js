@@ -3,14 +3,20 @@ import {
   BrowserRouter as Router,
  Route,
  Link,
- Switch
+ Switch,
+ Redirect
 } from 'react-router-dom';
 import './App.css';
 import InspectionList from './components/InspectionList';
 import * as inspectionAPI from './api/inspections';
+
 import * as clientAPI from './api/clients';
+
 import InspectionForm from './components/InspectionForm';
+
 import LoginForm from './components/authentication/login';
+import loginAPI from './api/logins';
+
 import RegisterForm from './components/authentication/register';
 import * as registerAPI from './api/registrations';
 
@@ -19,7 +25,8 @@ class App extends Component {
     inspections: null,
     clients: null,
     selectedClientObjectID: null,
-    registrations: null
+    registrations: null,
+    logins: null
    }
 
   componentDidMount() {
@@ -52,9 +59,15 @@ class App extends Component {
     inspectionAPI.save(inspection);
   }
 
-  // handleLoginSubmission = () => {
-  //   LoginForm.save()
-  // }
+
+  handleLoginSubmission = (email, password) => {
+    console.log("App received", { email, password })
+    this.setState(({ logins }) => {
+      logins: [ email, password ].concat(logins)
+    });
+  
+  }
+
 
   handleRegisterSubmission = ( registration ) => {
     this.setState(({ registrations }) => (
@@ -66,7 +79,7 @@ class App extends Component {
 
 
   render() {
-    const { inspections, clients, selectedClientObjectID, registrations } = this.state;
+    const { inspections, clients, selectedClientObjectID, registrations, logins } = this.state;
 
     console.log(`re-rendering with selectedClientObjectID: `, selectedClientObjectID);
 
@@ -84,7 +97,9 @@ class App extends Component {
                  &nbsp;&nbsp;&nbsp;&nbsp;
                  <Link to='/employees'>Show Employees</Link>
                  &nbsp;&nbsp;&nbsp;&nbsp;
-                 <Link to='/login'>Log In</Link>
+                 <Link to='/signin'>Log In</Link>
+                 &nbsp;&nbsp;&nbsp;&nbsp;
+                 <Link to='/signout'>Sign Out</Link>
                  &nbsp;&nbsp;&nbsp;&nbsp;
                  <Link to='/register'>New user</Link>
              </nav>
@@ -108,10 +123,19 @@ class App extends Component {
 
 
               //Authentication
-               <Route path='/login' render={() => (
+               <Route path='/signin' render={() => (
                 <LoginForm
                   onSubmit={this.handleLoginSubmission}/>
                  )
+               }/>
+
+               <Route path='/signout' render={() => (
+                 <div>
+                 { this.state.token && <Redirect to='/'/> }
+                  <LoginForm
+                    onSubmit={this.handleLoginSubmission}/>
+                 </div>
+               )
                }/>
 
                <Route path='/register' render={() => (
@@ -119,6 +143,7 @@ class App extends Component {
                   onSubmit={this.handleRegisterSubmission}/>
                  )
                }/>
+
 
 
 

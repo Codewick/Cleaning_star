@@ -1,13 +1,24 @@
+
+
+
 import React from 'react';
+
+
 
 export default function LoginForm({onSubmit}) {
   function handleFormSubmission(event) {
     event.preventDefault();
     // event.preventPropagation();
     const {elements} = event.target;
-    const loginName = elements["userName"].value;
+    const email = elements["email"].value;
     const password = elements["password"].value;
-    onSubmit({ loginName, password })
+    onSubmit({ email, password })
+    console.log("App received", { email, password })
+      // .then((data) => {
+      //   const token = data.token
+      //   this.setState({ token })
+      // })
+
   }
 
   return (
@@ -16,7 +27,7 @@ export default function LoginForm({onSubmit}) {
       <label>
         Login name
         &nbsp;
-        <input type="text" name="loginName"/>
+        <input type="email" name="email"/>
       </label>
 
       &nbsp;
@@ -24,12 +35,12 @@ export default function LoginForm({onSubmit}) {
       <label>
         Password
         &nbsp;
-        <input type="text" name="password" />
+        <input type="password" name="password" />
       </label>
 
       &nbsp;
 
-      <button type="submit">Save</button>
+      <button type="submit">Sign In</button>
 
     </form>
   )

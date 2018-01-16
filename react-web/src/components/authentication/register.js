@@ -1,4 +1,11 @@
 import React from 'react';
+import {
+  BrowserRouter as Router,
+ Route,
+ Link,
+ Switch
+} from 'react-router-dom';
+
 
 export default function RegisterForm({onSubmit}) {
   function handleFormSubmission(event) {
@@ -15,7 +22,7 @@ export default function RegisterForm({onSubmit}) {
 
   return (
 
-    <form className="px-4 py-3" onSubmit={handleFormSubmission}>
+    <form onSubmit={handleFormSubmission}>
 
       <label>
         First name
@@ -50,6 +57,7 @@ export default function RegisterForm({onSubmit}) {
       &nbsp;
 
       <button type="submit">Save</button>
+
 
     </form>
   )
