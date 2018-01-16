@@ -3,7 +3,8 @@ export function loginAPI(email,password) {
   return fetch('/login', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Accept': 'application/json'
 
     },
     body: JSON.stringify({ email, password })
@@ -11,7 +12,10 @@ export function loginAPI(email,password) {
 
   })
 
-  .then(res => console.log(res))
+  .then(res => {
+    console.log(res)
+    return res.json()
+  })
 
 
 
