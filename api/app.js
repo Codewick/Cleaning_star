@@ -112,6 +112,7 @@ app.get('/', (req, res) => {     //this is a callback
 });
 
 
+
 //Verify token
 function verifyToken(req, res, next){
 
