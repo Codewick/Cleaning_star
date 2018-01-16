@@ -13,7 +13,7 @@ export default function LoginForm({onSubmit}) {
     const email = elements["email"].value;
     const password = elements["password"].value;
     onSubmit({ email, password })
-    console.log("App received", { email, password })
+    console.log("Saved input from login form", { email, password })
       // .then((data) => {
       //   const token = data.token
       //   this.setState({ token })

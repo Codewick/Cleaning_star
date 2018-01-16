@@ -17,22 +17,20 @@ router.post('/', (req, res) => {
     email: req.body.email,
     password: req.body.password //hashedPassword
   },
-    (err,user) => {
-      console.log(`error (if any): `, err)
-      console.log(`user: `, user)
+  (err,user) => {
+         console.log(`error (if any): `, err)
+         console.log(`user: `, user)
 
-      if(err) return res.status(500).send("There was a problem registering the user.")
+    if(err) return res.status(500).send("There was a problem registering the user.")
 
-      res.json({
-        message: "User succesfully created.",
-        id:user._id,
-        email: user.email
-      });
-
-
-
+    res.json({
+      message: "User succesfully created.",
+      id:user._id,
+      email: user.email
+    });
   });
 });
+
 
 
 

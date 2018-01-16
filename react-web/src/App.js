@@ -15,7 +15,7 @@ import * as clientAPI from './api/clients';
 import InspectionForm from './components/InspectionForm';
 
 import LoginForm from './components/authentication/login';
-import loginAPI from './api/logins';
+import { loginAPI } from './api/logins';
 
 import RegisterForm from './components/authentication/register';
 import * as registerAPI from './api/registrations';
@@ -25,8 +25,7 @@ class App extends Component {
     inspections: null,
     clients: null,
     selectedClientObjectID: null,
-    registrations: null,
-    logins: null
+    registrations: null
    }
 
   componentDidMount() {
@@ -60,12 +59,22 @@ class App extends Component {
   }
 
 
-  handleLoginSubmission = (email, password) => {
-    console.log("App received", { email, password })
-    this.setState(({ logins }) => {
-      logins: [ email, password ].concat(logins)
-    });
-  
+  handleLoginSubmission = ({ email, password }) => {
+    console.log("handleLoginSubmission received", { email, password })
+    loginAPI( email, password )
+      .then((data) => {
+        console.log('signed in', data)
+        const token = data.token
+        if (token) {
+          inspectionAPI.all(token)
+            .then(inspections => {
+              this.setState({ inspections, token })
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        }
+      })
   }
 
 

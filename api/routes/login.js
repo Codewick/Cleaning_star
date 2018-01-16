@@ -1,6 +1,9 @@
 const express = require('express');
-const User = require('../models/user');
-
+const bodyParser = require('body-parser');
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const User = require('../models/user')
+const config = require('../config');
 const router = express.Router();
 
 

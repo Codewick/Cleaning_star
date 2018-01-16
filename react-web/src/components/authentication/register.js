@@ -43,7 +43,7 @@ export default function RegisterForm({onSubmit}) {
       <label>
         Email
         &nbsp;
-        <input type="text" name="email" />
+        <input type="email" name="email" />
       </label>
 
       &nbsp;
@@ -51,7 +51,7 @@ export default function RegisterForm({onSubmit}) {
       <label>
         Password
         &nbsp;
-        <input type="text" name="password" />
+        <input type="password" name="password" />
       </label>
 
       &nbsp;
