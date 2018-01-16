@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
- Route,
- Link,
- Switch
+  Route,
+  Switch
 } from 'react-router-dom';
 import './App.css';
+import Nav from './components/Nav';
 import InspectionList from './components/InspectionList';
 import ClientList from './components/ClientList';
 import EmployeeList from './components/EmployeeList';
@@ -20,7 +20,6 @@ import EmployeeForm from './components/EmployeeForm';
 import EmployeePage from './pages/EmployeePage';
 
 
-
 class App extends Component {
   state = {
     inspections: null,
@@ -30,21 +29,21 @@ class App extends Component {
    }
 
   componentDidMount() {
-      inspectionAPI.all()
-        .then(inspections => {
-          this.setState({ inspections })
-        })
+    inspectionAPI.all()
+      .then(inspections => {
+        this.setState({ inspections })
+      })
 
-      clientAPI.all()
-        .then(clients => {
-          this.setState({ clients })
-        })
+    clientAPI.all()
+      .then(clients => {
+        this.setState({ clients })
+      })
 
-        employeeAPI.all()
-          .then(employees => {
-            this.setState({ employees })
-          })
-    }
+    employeeAPI.all()
+      .then(employees => {
+        this.setState({ employees })
+      })
+  }
 
   handleSelectClientValueChange = (selectedClientObjectID) => {
     console.log(`selectedClientObjectID: `, selectedClientObjectID);
@@ -97,36 +96,7 @@ class App extends Component {
         <Router>
           <div className="App">
 
-            <div className="navbar-fixed">
-              <nav className="orange darken-2">
-                <div className="nav-wrapper container">
-                  <div className="logo"><a href="#!" className="brand-logo">Logo</a></div>
-                  <a href="#" data-activates="mobile-demo" className="button-collapse right"><i className="material-icons">menu</i></a>
-                  {/* This ul will disappear when the screen becomes too small */}
-                  <ul className="right hide-on-med-and-down">
-                    <li><Link to='/inspections/new'>Add Inspection</Link></li>
-                    <li><Link to='/inspections'>Show Inspections</Link></li>
-                    <li><Link to='/clients/new'>Add Client</Link></li>
-                    <li><Link to='/clients'>Show Clients</Link></li>
-                    <li><Link to='/employees/new'>Add Employees</Link></li>
-                    <li><Link to='/employees'>Show Employees</Link></li>
-                  </ul>
-                </div> {/* end nav-wrapper container div */}
-              </nav>
-            </div> {/* end navbar-fixed div */}
-            {/* we need to put the side-nav ul outside of the nav to get both fixed-navbar and hamburger to work together */}
-            <ul className="side-nav" id="mobile-demo">
-              <li className="grey lighten-3">Inspections</li>
-              <li><Link to='/inspections/new'>Add Inspection</Link></li>
-              <li><Link to='/inspections'>Show Inspections</Link></li>
-              <li className="grey lighten-3">Clients</li>
-              <li><Link to='/clients/new'>Add Client</Link></li>
-              <li><Link to='/clients'>Show Clients</Link></li>
-              <li className="grey lighten-3">Employees</li>
-              <li><Link to='/employees/new'>Add Employees</Link></li>
-              <li><Link to='/employees'>Show Employees</Link></li>
-            </ul>
-
+            <Nav />
 
             <Switch>
 
@@ -136,46 +106,33 @@ class App extends Component {
                   employees={employees}
                   selectedClientObjectID={selectedClientObjectID}
                   selectedEmployeeObjectID={selectedEmployeeObjectID}
-                  onChange={this.handleSelectClientValueChange}
-                  onChange={this.handleSelectEmployeeValueChange}
+                  onClientValueChange={this.handleSelectClientValueChange}
+                  onEmployeeValueChange={this.handleSelectEmployeeValueChange}
                   onSubmit={this.handleInspectionSubmission}
                 />
-              )
-              }/>
+              )}/>
 
               <Route path='/inspections' render={() => (
-               <InspectionPage inspections={inspections}/>
-                )
-              }/>
+               <InspectionPage inspections={inspections} clients={clients} employees={employees} />
+              )}/>
 
               <Route path='/clients/new' render={() => (
-                <ClientForm
-                  onSubmit={this.handleClientSubmission}
-                />
-                )
-              }/>
+                <ClientForm onSubmit={this.handleClientSubmission} />
+              )}/>
 
               <Route path='/clients' render={() => (
                <ClientPage clients={clients}/>
-                )
-              }/>
+              )}/>
 
               // employees
               <Route path='/employees/new' render={() => (
-                <EmployeeForm
-                  onSubmit={this.handleEmployeeSubmission}
-                />
+                <EmployeeForm onSubmit={this.handleEmployeeSubmission} />
                 )
               }/>
 
               <Route path='/employees' render={() => (
-               <EmployeePage employees={employees}/>
-                )
-              }/>
-
-
-
-
+                <EmployeePage employees={employees}/>
+              )}/>
 
             </Switch>
           </div>
