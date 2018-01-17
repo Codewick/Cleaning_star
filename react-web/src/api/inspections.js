@@ -1,3 +1,5 @@
+import { token } from './logins'
+
 export function all() {
   return fetch('/inspections')
     .then(res => res.json())
