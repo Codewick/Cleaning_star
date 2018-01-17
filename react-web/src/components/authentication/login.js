@@ -35,7 +35,7 @@ export default function LoginForm({onSubmit}) {
       <label>
         Password
         &nbsp;
-        <input type="password" name="password" />
+        <input type="password" name="password"/>
       </label>
 
       &nbsp;

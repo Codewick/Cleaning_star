@@ -1,18 +1,30 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
+
  Route,
  Link,
  Switch,
  Redirect
+
 } from 'react-router-dom';
 import './App.css';
+import Nav from './components/Nav';
 import InspectionList from './components/InspectionList';
+import ClientList from './components/ClientList';
+import EmployeeList from './components/EmployeeList';
 import * as inspectionAPI from './api/inspections';
 
 import * as clientAPI from './api/clients';
 
+import * as employeeAPI from './api/employees';
+
 import InspectionForm from './components/InspectionForm';
+import InspectionPage from './pages/InspectionPage';
+import ClientForm from './components/ClientForm';
+import ClientPage from './pages/ClientPage';
+import EmployeeForm from './components/EmployeeForm';
+import EmployeePage from './pages/EmployeePage';
 
 import LoginForm from './components/authentication/login';
 import * as auth from './api/logins';
@@ -27,20 +39,29 @@ class App extends Component {
     inspections: null,
     clients: null,
     selectedClientObjectID: null,
-    registrations: null
+    registrations: null,
+    employees: null
+
    }
 
   componentDidMount() {
-      inspectionAPI.all()
-        .then(inspections => {
-          this.setState({ inspections })
-        })
+    inspectionAPI.all()
+      .then(inspections => {
+        this.setState({ inspections })
+      })
 
-      clientAPI.all()
-        .then(clients => {
-          this.setState({ clients })
-        })
+    clientAPI.all()
+      .then(clients => {
+        this.setState({ clients })
+      })
+
+
+    employeeAPI.all()
+      .then(employees => {
+        this.setState({ employees })
+      })
     }
+
 
   handleSelectClientValueChange = (selectedClientObjectID) => {
     console.log(`selectedClientObjectID: `, selectedClientObjectID);
@@ -52,6 +73,16 @@ class App extends Component {
     console.log(`changed the state of the selectedClient to: `, this.state.selectedClientObjectID);
   }
 
+  handleSelectEmployeeValueChange = (selectedEmployeeObjectID) => {
+    console.log(`selectedEmployeeObjectID: `, selectedEmployeeObjectID);
+    this.setState((prevState, props) => {
+      console.log('setting state with: ', prevState, props)
+      return { selectedEmployeeObjectID: selectedEmployeeObjectID }
+    });
+
+    console.log(`changed the state of the selectedClient to: `, this.state.selectedEmployeeObjectID);
+  }
+
   handleInspectionSubmission = (inspection) => {
     this.setState(({ inspections }) => (
       { inspections: [ inspection ].concat(inspections) }
@@ -59,6 +90,7 @@ class App extends Component {
     console.log(inspection);
     inspectionAPI.save(inspection);
   }
+
 
 
   handleLoginSubmission = ({ email, password }) => {
@@ -96,49 +128,62 @@ class App extends Component {
   }
 
 
+  handleClientSubmission = (client) => {
+    this.setState(({ clients }) => (
+      {clients: [ client ].concat(clients) }
+    ));
+    clientAPI.save(client);
+  }
+
+  handleEmployeeSubmission = (employee) => {
+    this.setState(({ employees }) => (
+      {employees: [ employee ].concat(employees) }
+    ));
+    employeeAPI.save(employee);
+  }
+
   render() {
-    const { inspections, clients, selectedClientObjectID, registrations, logins } = this.state;
+    const { inspections, clients, selectedClientObjectID, selectedEmployeeObjectID, employees } = this.state;
 
     console.log(`re-rendering with selectedClientObjectID: `, selectedClientObjectID);
 
-    return (
-      <Router>
-           <div className="App">
-             <nav>
-                 <Link to='/inspections/new'>Add Inspection</Link>
-                 &nbsp;&nbsp;&nbsp;&nbsp;
-                 <Link to='/inspections'>Show Inspections</Link>
-                 <Link to='/clients/new'>Add Client</Link>
-                 <Link to='/clients'>Show Clients</Link>
-                 &nbsp;&nbsp;&nbsp;&nbsp;
-                 <Link to='/employees/new'>Add Employees</Link>
-                 &nbsp;&nbsp;&nbsp;&nbsp;
-                 <Link to='/employees'>Show Employees</Link>
-                 &nbsp;&nbsp;&nbsp;&nbsp;
-                 <Link to='/signin'>Log In</Link>
-                 &nbsp;&nbsp;&nbsp;&nbsp;
-                 <Link to='/signout'>Sign Out</Link>
-                 &nbsp;&nbsp;&nbsp;&nbsp;
-                 <Link to='/register'>New user</Link>
-             </nav>
-             <hr/>
-             <Switch>
+      return (
+        <Router>
+          <div className="App">
+            <Nav />
+            <Switch>
+              <Route path='/inspections/new' render={() => (
+                <InspectionForm
+                  clients={clients}
+                  employees={employees}
+                  selectedClientObjectID={selectedClientObjectID}
+                  selectedEmployeeObjectID={selectedEmployeeObjectID}
+                  onClientValueChange={this.handleSelectClientValueChange}
+                  onEmployeeValueChange={this.handleSelectEmployeeValueChange}
+                  onSubmit={this.handleInspectionSubmission}
+                />
+              )}/>
 
-               <Route path='/inspections/new' render={() => (
-                 <InspectionForm
-                   clients={clients}
+              <Route path='/inspections' render={() => (
+               <InspectionPage inspections={inspections} clients={clients} employees={employees} />
+              )}/>
 
-                   selectedClientObjectID={selectedClientObjectID}
+              <Route path='/clients/new' render={() => (
+                <ClientForm onSubmit={this.handleClientSubmission} />
+              )}/>
 
-                   onChange={this.handleSelectClientValueChange}
+              <Route path='/clients' render={() => (
+               <ClientPage clients={clients}/>
+              )}/>
 
-                   onSubmit={this.handleInspectionSubmission}
-                 />
-               )
-               }/>
+              // employees
+              <Route path='/employees/new' render={() => (
+                <EmployeeForm onSubmit={this.handleEmployeeSubmission} />
+              )}/>
 
-
-
+              <Route path='/employees' render={() => (
+                <EmployeePage employees={employees}/>
+              )}/>
 
               //Authentication
               <Route path='/signin' render={() => (
@@ -151,15 +196,11 @@ class App extends Component {
                )
                }/>
 
-
                <Route path='/signout' render={() => (
                 <SignOutForm
                   onSignOut={this.handleSignOutSubmission}/>
                  )
                }/>
-
-
-
 
                <Route path='/register' render={() => (
                 <RegisterForm
@@ -167,13 +208,12 @@ class App extends Component {
                  )
                }/>
 
-             </Switch>
-           </div>
-       </Router>
 
+            </Switch>
+          </div>
+      </Router>
     );
   }
 }
-
 
 export default App;

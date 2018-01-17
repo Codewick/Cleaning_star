@@ -1345,6 +1345,13 @@ clap@^1.0.9:
   dependencies:
     chalk "^1.1.3"
 
+<<<<<<< HEAD
+=======
+classnames@^2.2.5:
+  version "2.2.5"
+  resolved "https://registry.yarnpkg.com/classnames/-/classnames-2.2.5.tgz#fb3801d453467649ef3603c7d61a02bd129bde6d"
+
+>>>>>>> master
 clean-css@4.1.x:
   version "4.1.9"
   resolved "https://registry.yarnpkg.com/clean-css/-/clean-css-4.1.9.tgz#35cee8ae7687a49b98034f70de00c4edd3826301"
@@ -5343,7 +5350,11 @@ react-dev-utils@^4.2.1:
     strip-ansi "3.0.1"
     text-table "0.2.0"
 
+<<<<<<< HEAD
 react-dom@^16.2.0:
+=======
+react-dom@^16.0.0, react-dom@^16.2.0:
+>>>>>>> master
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react-dom/-/react-dom-16.2.0.tgz#69003178601c0ca19b709b33a83369fe6124c044"
   dependencies:
@@ -5355,6 +5366,14 @@ react-dom@^16.2.0:
 react-error-overlay@^3.0.0:
   version "3.0.0"
   resolved "https://registry.yarnpkg.com/react-error-overlay/-/react-error-overlay-3.0.0.tgz#c2bc8f4d91f1375b3dad6d75265d51cd5eeaf655"
+
+react-materialize@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-materialize/-/react-materialize-1.1.2.tgz#f6a4872c224ac9c9718ff49c77786382484cc1cb"
+  dependencies:
+    classnames "^2.2.5"
+    react "^16.0.0"
+    react-dom "^16.0.0"
 
 react-reconciler@^0.7.0:
   version "0.7.0"
@@ -5439,7 +5458,11 @@ react-test-renderer@^16.0.0-0, react-test-renderer@^16.2.0:
     object-assign "^4.1.1"
     prop-types "^15.6.0"
 
+<<<<<<< HEAD
 react@^16.2.0:
+=======
+react@^16.0.0, react@^16.2.0:
+>>>>>>> master
   version "16.2.0"
   resolved "https://registry.yarnpkg.com/react/-/react-16.2.0.tgz#a31bd2dab89bff65d42134fa187f24d054c273ba"
   dependencies:

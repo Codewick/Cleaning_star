@@ -10,7 +10,8 @@ const inspectionSchema = Schema({
   frequency: Number,
   auditor: String,
   comments: String,
-  worker: { type: ObjectId, ref: 'Employee'}
+  date: Date,
+  employee: { type: ObjectId, ref: 'Employee'}
 });
 
 // convert schema into Model, instances of models(classes) are documents

@@ -1,8 +1,13 @@
 const Client = require('../models/client');
 
 Client.create([
+
   {
-      name: "Coder Academy",
+      name: "AIT",
+      address: "CBD"
+  },
+  {
+      name: "Broadway",
       address: "Ultimo"
   }
 ]);
