@@ -15,7 +15,9 @@ import * as clientAPI from './api/clients';
 import InspectionForm from './components/InspectionForm';
 
 import LoginForm from './components/authentication/login';
-import { loginAPI } from './api/logins';
+import * as auth from './api/logins';
+
+import SignOutForm from './components/authentication/signout'
 
 import RegisterForm from './components/authentication/register';
 import * as registerAPI from './api/registrations';
@@ -61,7 +63,7 @@ class App extends Component {
 
   handleLoginSubmission = ({ email, password }) => {
     console.log("handleLoginSubmission received", { email, password })
-    loginAPI( email, password )
+    auth.loginAPI( email, password )
       .then((data) => {
         console.log('signed in', data)
         const token = data.token
@@ -77,6 +79,11 @@ class App extends Component {
       }
 
     )
+  }
+
+  handleSignOutSubmission =() => {
+    auth.signOut()
+    this.setState({inspections:null})
   }
 
 
@@ -134,31 +141,32 @@ class App extends Component {
 
 
               //Authentication
-               <Route path='/signin' render={() => (
-                <LoginForm
-                  onSubmit={this.handleLoginSubmission}/>
-                 )
-               }/>
-
-               <Route path='/signout' render={() => (
+              <Route path='/signin' render={() => (
                  <div>
-                 { this.state.token && <Redirect to='/'/> }
+                 { auth.isSignedIn() && <Redirect to='/inspections'/> }
+
                   <LoginForm
                     onSubmit={this.handleLoginSubmission}/>
                  </div>
                )
                }/>
 
-               <Route path='/register' render={() => (
-                <RegisterForm
-                  onSubmit={this.handleRegisterSubmission}/>
+
+               <Route path='/signout' render={() => (
+                //{ auth.sigOut()}
+                <SignOutForm
+                  onSignOut={this.handleSignOutSubmission}/>
                  )
                }/>
 
 
 
 
-
+               <Route path='/register' render={() => (
+                <RegisterForm
+                  onSubmit={this.handleRegisterSubmission}/>
+                 )
+               }/>
 
              </Switch>
            </div>

@@ -1,3 +1,6 @@
+import decodeJWT from 'jwt-decode'
+
+
 
 function setToken(token) {
   if (token) {
@@ -5,6 +8,16 @@ function setToken(token) {
   } else {
     localStorage.removeItem('token')
   }
+}
+
+export function decodedToken() {
+  if (isSignedIn()) {
+    return decodeJWT(token())
+  }
+}
+
+export function token() {
+  return localStorage.getItem('token')
 }
 
 export function loginAPI(email,password) {
@@ -17,21 +30,26 @@ export function loginAPI(email,password) {
 
     },
     body: JSON.stringify({ email, password })
-
-
   })
 
   .then(res => {
     console.log(res)
     return res.json()
   })
-.then(json => {
-  if (json){ setToken(json['token'])}
-  return json
-})
-
-
+  .then(json => {
+    if (json){ setToken(json['token'])}
+    console.log(decodedToken())
+    return json
+  })
 
   .catch(error => { console.log(error) })
 
+}
+
+export function signOut() {
+  setToken()
+}
+
+export function isSignedIn() {
+  return !!token()
 }
