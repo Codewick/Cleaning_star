@@ -153,7 +153,6 @@ class App extends Component {
 
 
                <Route path='/signout' render={() => (
-                //{ auth.sigOut()}
                 <SignOutForm
                   onSignOut={this.handleSignOutSubmission}/>
                  )
