@@ -1,11 +1,11 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
- Route,
- Link,
- Switch
+  Route,
+  Switch
 } from 'react-router-dom';
 import './App.css';
+import Nav from './components/Nav';
 import InspectionList from './components/InspectionList';
 import ClientList from './components/ClientList';
 import EmployeeList from './components/EmployeeList';
@@ -19,8 +19,6 @@ import ClientPage from './pages/ClientPage';
 import EmployeeForm from './components/EmployeeForm';
 import EmployeePage from './pages/EmployeePage';
 
-
-
 class App extends Component {
   state = {
     inspections: null,
@@ -30,21 +28,23 @@ class App extends Component {
    }
 
   componentDidMount() {
-      inspectionAPI.all()
-        .then(inspections => {
-          this.setState({ inspections })
-        })
+    inspectionAPI.all()
+      .then(inspections => {
+        this.setState({ inspections })
+      })
 
-      clientAPI.all()
-        .then(clients => {
-          this.setState({ clients })
-        })
+    clientAPI.all()
+      .then(clients => {
+        this.setState({ clients })
+      })
 
-        employeeAPI.all()
-          .then(employees => {
-            this.setState({ employees })
-          })
+
+    employeeAPI.all()
+      .then(employees => {
+        this.setState({ employees })
+      })
     }
+
 
   handleSelectClientValueChange = (selectedClientObjectID) => {
     console.log(`selectedClientObjectID: `, selectedClientObjectID);
@@ -96,73 +96,44 @@ class App extends Component {
       return (
         <Router>
           <div className="App">
-            <nav>
-                <Link to='/inspections/new'>Add Inspection</Link>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <Link to='/inspections'>Show Inspections</Link>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <Link to='/clients/new'>Add Client</Link>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <Link to='/clients'>Show Clients</Link>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <Link to='/employees/new'>Add Employees</Link>
-                &nbsp;&nbsp;&nbsp;&nbsp;
-                <Link to='/employees'>Show Employees</Link>
-            </nav>
-            <hr/>
+            <Nav />
             <Switch>
-
               <Route path='/inspections/new' render={() => (
                 <InspectionForm
                   clients={clients}
                   employees={employees}
                   selectedClientObjectID={selectedClientObjectID}
                   selectedEmployeeObjectID={selectedEmployeeObjectID}
-                  onChange={this.handleSelectClientValueChange}
-                  onChange={this.handleSelectEmployeeValueChange}
+                  onClientValueChange={this.handleSelectClientValueChange}
+                  onEmployeeValueChange={this.handleSelectEmployeeValueChange}
                   onSubmit={this.handleInspectionSubmission}
                 />
-              )
-              }/>
+              )}/>
 
               <Route path='/inspections' render={() => (
-               <InspectionPage inspections={inspections}/>
-                )
-              }/>
+               <InspectionPage inspections={inspections} clients={clients} employees={employees} />
+              )}/>
 
               <Route path='/clients/new' render={() => (
-                <ClientForm
-                  onSubmit={this.handleClientSubmission}
-                />
-                )
-              }/>
+                <ClientForm onSubmit={this.handleClientSubmission} />
+              )}/>
 
               <Route path='/clients' render={() => (
                <ClientPage clients={clients}/>
-                )
-              }/>
+              )}/>
 
               // employees
               <Route path='/employees/new' render={() => (
-                <EmployeeForm
-                  onSubmit={this.handleEmployeeSubmission}
-                />
-                )
-              }/>
+                <EmployeeForm onSubmit={this.handleEmployeeSubmission} />
+              )}/>
 
               <Route path='/employees' render={() => (
-               <EmployeePage employees={employees}/>
-                )
-              }/>
-
-
-
-
+                <EmployeePage employees={employees}/>
+              )}/>
 
             </Switch>
           </div>
       </Router>
-
     );
   }
 }

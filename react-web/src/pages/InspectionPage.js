@@ -3,8 +3,8 @@ import { Route, Switch } from 'react-router-dom'
 import InspectionList from '../components/InspectionList'
 import Inspection from '../components/Inspection'
 
-export default ({ inspections }) => (
-  !!inspections ? (
+export default ({ inspections, clients, employees }) => (
+  !!inspections && !!clients && !!employees ? (
     <Switch>
       <Route path='/inspections/:id' render={
         ({ match }) => {
@@ -17,7 +17,7 @@ export default ({ inspections }) => (
           return (<Inspection {...inspection} />)
         }} />
         <Route path='/inspections' render={() => (
-          <InspectionList inspections={inspections} />
+          <InspectionList inspections={inspections} clients={clients} employees={employees} />
       )} />
     </Switch>
   ) : (
