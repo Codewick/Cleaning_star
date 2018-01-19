@@ -1,6 +1,5 @@
-import decodeJWT from 'jwt-decode'
-
-
+import decodeJWT from 'jwt-decode';
+import jwt_decode from "jwt-decode";
 
 function setToken(token) {
   if (token) {

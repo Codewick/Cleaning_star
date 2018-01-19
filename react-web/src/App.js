@@ -62,7 +62,6 @@ class App extends Component {
       })
     }
 
-
   handleSelectClientValueChange = (selectedClientObjectID) => {
     console.log(`selectedClientObjectID: `, selectedClientObjectID);
     this.setState((prevState, props) => {
@@ -91,8 +90,6 @@ class App extends Component {
     inspectionAPI.save(inspection);
   }
 
-
-
   handleLoginSubmission = ({ email, password }) => {
     console.log("handleLoginSubmission received", { email, password })
     auth.loginAPI( email, password )
@@ -109,7 +106,6 @@ class App extends Component {
             })
         }
       }
-
     )
   }
 

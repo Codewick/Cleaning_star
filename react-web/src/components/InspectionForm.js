@@ -49,11 +49,11 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
       // Note: ObjectID associated with Mongo object is returned from server as _id
       if (selectedEmployeeObjectID) {
         return (
-          <option value={employee._id} selected={ selectedEmployeeObjectID == employee._id ? "selected" : ""}>{employee.name}</option>
+          <option value={employee._id} selected={ selectedEmployeeObjectID == employee._id ? "selected" : ""}>{employee.firstName}</option>
         )
       } else {
         return (
-          <option value={employee._id} selected={ index == 0 ? "selected" : ""}>{employee.name}</option>
+          <option value={employee._id} selected={ index == 0 ? "selected" : ""}>{employee.firstName}</option>
         )
       }
     });
@@ -64,11 +64,11 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
       // Note: ObjectID associated with Mongo object is returned from server as _id
       if (selectedEmployeeObjectID) {
         return (
-          <option value={employee._id} selected={ selectedEmployeeObjectID == employee._id ? "selected" : ""}>{employee.name}</option>
+          <option value={employee._id} selected={ selectedEmployeeObjectID == employee._id ? "selected" : ""}>{employee.firstName}</option>
         )
       } else {
         return (
-          <option value={employee._id} selected={ index == 0 ? "selected" : ""}>{employee.name}</option>
+          <option value={employee._id} selected={ index == 0 ? "selected" : ""}>{employee.firstName}</option>
         )
       }
     });

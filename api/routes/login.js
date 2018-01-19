@@ -6,8 +6,6 @@ const User = require('../models/user')
 const config = require('../config');
 const router = express.Router();
 
-
-
 //Log In
 router.post('/', (req, res) => {
     console.log(`logging in with req.body: `, req.body);

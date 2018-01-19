@@ -1,9 +1,4 @@
-
-
-
 import React from 'react';
-
-
 
 export default function LoginForm({onSubmit}) {
   function handleFormSubmission(event) {
