@@ -20,7 +20,7 @@ export default function ClientList({ clients }) {
                         <p>{client.address}</p>
                         <p>{client.contact_person}</p>
                         <p>{client.contact_number}</p>
-                        <p>{client.contact_email}</p>
+                        <p>{client.e_mail}</p>
                       </div>
                     </span>
                   </div>

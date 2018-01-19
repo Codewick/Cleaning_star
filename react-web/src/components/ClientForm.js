@@ -8,9 +8,9 @@ export default function ClientForm({onSubmit}) {
     const name = elements["name"].value;
     const address = elements["address"].value;
     const contact_number = elements["contact_number"].value;
-    const contact_email = elements["contact_email"].value;
+    const e_mail = elements["e_mail"].value;
     const contact_person = elements["contact_person"].value;
-    onSubmit({ name, address, contact_number, contact_email, contact_person })
+    onSubmit({ name, address, contact_number, e_mail, contact_person })
   }
 
   return (
@@ -49,7 +49,7 @@ export default function ClientForm({onSubmit}) {
         <div className="row">
           <div className="col m2"></div>
             <div className="input-field col s12 m8">
-              <input id="client_email" name="contact_email" type="text" className="validate"/>
+              <input id="client_email" name="e_mail" type="text" className="validate"/>
               <label for="client_email">Contact Email</label>
             </div>
           <div className="col m2"></div>
