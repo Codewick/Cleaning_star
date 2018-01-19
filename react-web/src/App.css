@@ -42,10 +42,6 @@ body {
 }
 
 /*clientlist*/
-.client-box {
-  height: 100px;
-}
-
 .client-name {
   margin-top: 40px;
 }
