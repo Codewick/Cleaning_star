@@ -1,5 +1,15 @@
 import React from 'react';
 import Inspection from './Inspection';
+import InspectionDetails from './InspectionDetails'
+import {
+  BrowserRouter as Router,
+  Route,
+  Link,
+  Switch,
+  Redirect
+
+} from 'react-router-dom';
+
 
 export default function InspectionList({ inspections, clients, employees }) {
 
@@ -12,7 +22,7 @@ export default function InspectionList({ inspections, clients, employees }) {
     let matchingInspections = [];
     inspections.forEach(inspection => {
       clients.forEach(function(client, index) {
-        if (client._id == inspection.client) {
+        if (client._id === inspection.client) {
           console.log("match")
           // Append a clientName property to the inspection object
           match = Object.assign({}, inspection, { clientName: client.name });
@@ -23,7 +33,7 @@ export default function InspectionList({ inspections, clients, employees }) {
       });
 
       employees.forEach(function(employee, index) {
-        if (employee._id == inspection.employee) {
+        if (employee._id === inspection.employee) {
           console.log("match")
           // Append a employeeName property to the match object
           match_final = Object.assign({}, match, { employeeName: employee.name });
@@ -47,17 +57,14 @@ export default function InspectionList({ inspections, clients, employees }) {
   }
 
 
-
-  // inspections.map(inspection => (
-  //   <div className="card blue-grey">
-  //     <Inspection key={inspection._id} {...inspection}/>
-  //   </div>
-  // ))
-
   return (
+
     <div>
-      <h1>Inspection List</h1>
-      { renderInspections() }
+
+        <h1>Inspection List</h1>
+        <Link to='/inspections/details'>  { renderInspections() }</Link>
+
     </div>
+
   )
 }

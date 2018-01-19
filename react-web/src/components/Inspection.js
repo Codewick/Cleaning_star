@@ -5,7 +5,7 @@ export default function Inspection(props) {
   console.log(clientName);
   return (
     <div className="inspection">
-    
+
       <span>
         Client: {clientName}
       </span>&nbsp;

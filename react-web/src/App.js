@@ -11,6 +11,7 @@ import {
 import './App.css';
 import Nav from './components/Nav';
 import InspectionList from './components/InspectionList';
+import InspectionDetails from './components/InspectionDetails';
 import ClientList from './components/ClientList';
 import EmployeeList from './components/EmployeeList';
 import * as inspectionAPI from './api/inspections';
@@ -152,6 +153,8 @@ class App extends Component {
           <div className="App">
             <Nav />
             <Switch>
+            
+            //inspections
               <Route path='/inspections/new' render={() => (
                 <InspectionForm
                   clients={clients}
@@ -168,6 +171,13 @@ class App extends Component {
                <InspectionPage inspections={inspections} clients={clients} employees={employees} />
               )}/>
 
+
+              <Route path='/inspections/details' render={() => (
+               <InspectionDetails/>
+              )}/>
+
+
+              //clients
               <Route path='/clients/new' render={() => (
                 <ClientForm onSubmit={this.handleClientSubmission} />
               )}/>
@@ -175,6 +185,7 @@ class App extends Component {
               <Route path='/clients' render={() => (
                <ClientPage clients={clients}/>
               )}/>
+
 
               // employees
               <Route path='/employees/new' render={() => (
@@ -184,6 +195,7 @@ class App extends Component {
               <Route path='/employees' render={() => (
                 <EmployeePage employees={employees}/>
               )}/>
+
 
               //Authentication
               <Route path='/signin' render={() => (
@@ -217,3 +229,8 @@ class App extends Component {
 }
 
 export default App;
+
+
+
+//this goes back to the render InspectionDetails router
+//inspections={inspections} clients={clients} employees={employees}

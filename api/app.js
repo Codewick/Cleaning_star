@@ -27,58 +27,11 @@ app.use('/user/new', signup);
 const login = require('./routes/login');
 app.use('/login', login);
 
-
-
-app.get('/', verifyToken, (req, res) => {     //this is a callback
-  res.json({
-    message: 'Welcome to the index page',
-    resources: [{
-      inspections: '/inspections'
-    }]
-  });
-});
-
-
+// TODO - potentially move into a router
 app.get('/user', (req, res) => {
-
   User.find({}, (err, user) => {
     res.json(user);
   })
-
 });
-
-
-app.get('/', (req, res) => {     //this is a callback
-  res.json({
-    resources: [{
-      clients: '/clients'
-    }]
-  })
-});
-
-
-
-app.get('/', (req, res) => {     //this is a callback
-  res.json({
-    resources: [{
-      clients: '/employees'
-    }]
-  })
-
-});
-
-function verifyToken(req, res, next){
-
-    let token = req.body.token || req.query.token || req.headers['x-access-token'];
-    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
-
-    jwt.verify(token, config.secret, function(err, decoded) {
-      if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
-
-      res.status(200).send(decoded);
-    });
-
-}
-
 
 module.exports = app;
