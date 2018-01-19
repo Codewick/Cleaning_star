@@ -2,11 +2,12 @@ import React from 'react';
 import Employee from './Employee';
 
 export default function EmployeeList({ employees }) {
+  let sortedEmployees = employees.sort((a, b) => a.lastName.localeCompare(b.lastName))
   return (
     <div>
       <h1>Employee List</h1>
       {
-        employees.map(employee => (
+        sortedEmployees.map(employee => (
           <div className="row">
             <div className="col s1 m3"></div>
             <div className="col s10 m6">
@@ -18,7 +19,7 @@ export default function EmployeeList({ employees }) {
                     <div className="card-panel light-blue accent-4 col s10 m6">
                       <span className="white-text">
                         <div className="row employee-list-item">
-                          <p>{employee.firstName} {employee.lastName}</p>
+                          <p>{employee.lastName}, {employee.firstName}</p>
                         </div>
                         <p>{employee.contact_number}</p>
                       </span>
