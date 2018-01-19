@@ -31,25 +31,22 @@
   to { transform: rotate(360deg); }
 }
 
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+} /* This disables horizontal scrolling */
+
 /*main page*/
 body {
   background-color: #eeeeee;
 }
 
 /*employee list*/
-.employee-box {
-  height: 100px;
-}
-
 .employee-list-item {
   padding-top: 20px;
 }
 
 /*clientlist*/
-.client-box {
-  height: 100px;
-}
-
 .client-name {
   margin-top: 40px;
 }

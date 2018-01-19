@@ -10,18 +10,26 @@ export default function EmployeeList({ employees }) {
           <div className="row">
             <div className="col s1 m3"></div>
             <div className="col s10 m6">
-              <div className="employee-box grey lighten-1">
+
                 <span key={employee._id}>
                   <div className="row employee-list-item">
-                    <div className="col s2 m4"></div>
-                    <div className="col s4 m2">{employee.firstName}</div>
-                    <div className="col s4 m2">{employee.lastName}</div>
-                    <div className="col s2 m4"></div>
+                    <div className="col s1 m3"></div>
+
+                    <div className="card-panel light-blue accent-4 col s10 m6">
+                      <span className="white-text">
+                        <div className="row employee-list-item">
+                          <p>{employee.firstName} {employee.lastName}</p>
+                        </div>
+                        <p>{employee.contact_number}</p>
+                      </span>
+                    </div>
+
+                    <div className="col s1 m3"></div>
                   </div>
                 </span>
-                <div className="row" key={employee._id}>{employee.contact_number}</div>
+
                 {/*<Employee key={employee._id} {...employee}/>*/}
-              </div>
+
             </div>
             <div className="col s1 m3"></div>
           </div>
