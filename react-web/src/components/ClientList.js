@@ -2,11 +2,12 @@ import React from 'react';
 import Client from './Client';
 
 export default function ClientList({ clients }) {
+  let sortedClients = clients.sort((a, b) => a.name.localeCompare(b.name))
   return (
     <div>
       <h1>Client List</h1>
       {
-        clients.map(client => (
+        sortedClients.map(client => (
           <div className="row">
             <div className="col s1 m3"></div>
             <div className="col s10 m6">
@@ -20,7 +21,7 @@ export default function ClientList({ clients }) {
                         <p>{client.address}</p>
                         <p>{client.contact_person}</p>
                         <p>{client.contact_number}</p>
-                        <p>{client.contact_email}</p>
+                        <p>{client.e_mail}</p>
                       </div>
                     </span>
                   </div>

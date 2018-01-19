@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Client(props) {
-  const { name, address, contact_number, contact_email, contact_person } = props;
+  const { name, address, contact_number, e_mail, contact_person } = props;
   return (
     <div className="client">
       <span>
@@ -12,7 +12,7 @@ export default function Client(props) {
         Contact: {contact_number}
       </span>
       <span>
-        Email: {contact_email}
+        Email: {e_mail}
       </span>
       <span>
         Person: {contact_person}
