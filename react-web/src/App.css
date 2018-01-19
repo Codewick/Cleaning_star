@@ -37,10 +37,6 @@ body {
 }
 
 /*employee list*/
-.employee-box {
-  height: 100px;
-}
-
 .employee-list-item {
   padding-top: 20px;
 }
