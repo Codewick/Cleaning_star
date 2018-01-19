@@ -18,15 +18,19 @@ const router = express.Router();
 
 // GET http://localhost:7000/inspections
 router.get('/', verifyToken, (req, res) => {
+  // console.log(`request received at inspections GET endpoint ${res.body}`);
   Inspection.find()
     .populate('worker')
-    .then(inspections => res.json(inspections))
+    .then(inspections => {
+      console.log('found inspections: ', inspections);
+      return res.json(inspections);
+    })
     .catch(error => res.json({ error }))
 });
 
 // POST http://localhost:7000/inspections
-router.post('/', (req, res) => {
-  console.log(`request received at inspections/ endpoint ${res.body}`);
+router.post('/', verifyToken, (req, res) => {
+  console.log(`request received at inspections POST endpoint ${res.body}`);
   Inspection.create(req.body)
     .then((inspection) => {
       console.log(`inspection created ${inspection}`);

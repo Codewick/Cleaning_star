@@ -5,15 +5,7 @@ import React from 'react';
 
 
 
-//export default function LoginForm({onSubmit}) {
-
-export default class LoginForm extends React.component({onSubmit}) {
-  state = {
-    email: null,
-    password: null
-  }
-
-
+export default function LoginForm({onSubmit}) {
   function handleFormSubmission(event) {
     event.preventDefault();
     // event.preventPropagation();
@@ -27,11 +19,7 @@ export default class LoginForm extends React.component({onSubmit}) {
       //   this.setState({ token })
       // })
 
-    function handleInputChange (event) {
-      const email = event.target.email
-      const password = event.target.password
-      console.log({email, password})
-    }
+      
 
 
 
@@ -43,7 +31,7 @@ export default class LoginForm extends React.component({onSubmit}) {
       <label>
         Login name
         &nbsp;
-        <input onChange={this.handleInputChange} type="email" name="email"/>
+        <input type="email" name="email"/>
       </label>
 
       &nbsp;
@@ -51,7 +39,7 @@ export default class LoginForm extends React.component({onSubmit}) {
       <label>
         Password
         &nbsp;
-        <input onChange={this.handleInputChange} type="password" name="password"/>
+        <input type="password" name="password"/>
       </label>
 
       &nbsp;

@@ -27,7 +27,9 @@ app.use('/user/new', signup);
 const login = require('./routes/login');
 app.use('/login', login);
 
-// TODO - potentially move into a router
+
+
+// TO-DO - potentially move into a router
 app.get('/user', (req, res) => {
   User.find({}, (err, user) => {
     res.json(user);

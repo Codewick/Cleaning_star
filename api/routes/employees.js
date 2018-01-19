@@ -15,7 +15,7 @@ router.get('/', verifyToken, (req, res) => {
 });
 
 // POST http://localhost:7000/employees
-router.post('/', (req, res) => {
+router.post('/',verifyToken, (req, res) => {
   Employee.create(req.body)
     .then((employee) => {
       res.status(201).json(employee).end();

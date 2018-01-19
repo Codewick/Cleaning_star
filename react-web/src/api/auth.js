@@ -27,11 +27,9 @@ export function loginAPI(email,password) {
     headers: {
       'Content-Type': 'application/json',
       'Accept': 'application/json'
-
     },
     body: JSON.stringify({ email, password })
   })
-
   .then(res => {
     console.log(res)
     return res.json()
@@ -41,9 +39,7 @@ export function loginAPI(email,password) {
     console.log(decodedToken())
     return json
   })
-
   .catch(error => { console.log(error) })
-
 }
 
 export function signOut() {

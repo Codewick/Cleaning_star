@@ -1,3 +1,5 @@
+import { token } from './auth'
+
 export function all() {
   return fetch('/employees')
     .then(res => res.json())
@@ -8,7 +10,8 @@ export function save(employee) {
   return fetch('/employees', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token()}`
     },
     body: JSON.stringify(employee)
   })

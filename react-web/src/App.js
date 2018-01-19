@@ -28,7 +28,7 @@ import EmployeeForm from './components/EmployeeForm';
 import EmployeePage from './pages/EmployeePage';
 
 import LoginForm from './components/authentication/login';
-import * as auth from './api/logins';
+import * as auth from './api/auth';
 
 import SignOutForm from './components/authentication/signout'
 
@@ -42,12 +42,12 @@ class App extends Component {
     selectedClientObjectID: null,
     registrations: null,
     employees: null
-
    }
 
   componentDidMount() {
     inspectionAPI.all()
       .then(inspections => {
+        console.log('received inspections from server: ', inspections);
         this.setState({ inspections })
       })
 
@@ -109,9 +109,10 @@ class App extends Component {
               console.log(error)
             })
         }
-      }
-
-    )
+      })
+      .catch(error => {
+        console.log('Failed to sign in with error: ', error);
+      })
   }
 
   handleSignOutSubmission =() => {
@@ -153,7 +154,7 @@ class App extends Component {
           <div className="App">
             <Nav />
             <Switch>
-            
+
             //inspections
               <Route path='/inspections/new' render={() => (
                 <InspectionForm
@@ -168,7 +169,7 @@ class App extends Component {
               )}/>
 
               <Route path='/inspections' render={() => (
-               <InspectionPage inspections={inspections} clients={clients} employees={employees} />
+                <InspectionPage inspections={inspections} clients={clients} employees={employees} />
               )}/>
 
 
