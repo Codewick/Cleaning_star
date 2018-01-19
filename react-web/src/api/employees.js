@@ -1,9 +1,18 @@
 import { token } from './auth'
 
 export function all() {
-  return fetch('/employees')
+  console.log('TOKEN TO BE SENT TO SERVER: ', token())
+  return fetch('/employees', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token()}`
+    }
+  })
     .then(res => res.json())
-    .catch(error => { console.log(error) })
+    .catch(error => {
+      console.log(`response from backend error: ${error}`);
+    })
 }
 
 export function save(employee) {
@@ -16,7 +25,6 @@ export function save(employee) {
     body: JSON.stringify(employee)
   })
   .then(res => {
-    console.log(`response from backend: ${JSON.stringify(res)}`);
     res.json()
   })
   .catch(error => {

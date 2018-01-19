@@ -30,12 +30,10 @@ export function loginAPI(email,password) {
     },
     body: JSON.stringify({ email, password })
   })
-  .then(res => {
-    console.log(res)
-    return res.json()
-  })
+  .then(res => res.json())
   .then(json => {
-    if (json){ setToken(json['token'])}
+    console.log(json, json['token'])
+    if (json && json['token']) { setToken(json['token'])}
     console.log(decodedToken())
     return json
   })

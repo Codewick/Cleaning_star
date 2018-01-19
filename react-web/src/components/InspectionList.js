@@ -17,31 +17,31 @@ export default function InspectionList({ inspections, clients, employees }) {
     let match;
     let match_final;
     let matchingInspections = [];
-    // inspections.forEach(inspection => {
-      // clients.forEach(function(client, index) {
-      //   if (client._id === inspection.client) {
-      //     console.log("match")
-      //     // Append a clientName property to the inspection object
-      //     match = Object.assign({}, inspection, { clientName: client.name });
-      //
-      //     console.log(match)
-      //     // matchingInspections.push(match);
-      //   }
-      // });
+    inspections.forEach(inspection => {
+      clients.forEach(function(client, index) {
+        if (client._id === inspection.client) {
+          console.log("match")
+          // Append a clientName property to the inspection object
+          match = Object.assign({}, inspection, { clientName: client.name });
 
-    //   employees.forEach(function(employee, index) {
-    //     if (employee._id === inspection.employee) {
-    //       console.log("match")
-    //       // Append a employeeName property to the match object
-    //       match_final = Object.assign({}, match, { employeeName: employee.name });
-    //
-    //       console.log(match_final)
-    //       matchingInspections.push(match_final);
-    //     }
-    //   });
-    //
-    //
-    // });
+          console.log(match)
+          // matchingInspections.push(match);
+        }
+      });
+
+      employees.forEach(function(employee, index) {
+        if (employee._id === inspection.employee) {
+          console.log("match")
+          // Append a employeeName property to the match object
+          match_final = Object.assign({}, match, { employeeName: employee.name });
+
+          console.log(match_final)
+          matchingInspections.push(match_final);
+        }
+      });
+
+
+    });
     return matchingInspections;
   }
 
