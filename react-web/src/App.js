@@ -3,17 +3,12 @@ import {
   BrowserRouter as Router,
 
  Route,
- Link,
- Switch,
- Redirect
+ Switch
 
 } from 'react-router-dom';
 import './App.css';
 import Nav from './components/Nav';
-import InspectionList from './components/InspectionList';
-import InspectionDetails from './components/InspectionDetails';
-import ClientList from './components/ClientList';
-import EmployeeList from './components/EmployeeList';
+
 import * as inspectionAPI from './api/inspections';
 
 import * as clientAPI from './api/clients';
@@ -22,8 +17,10 @@ import * as employeeAPI from './api/employees';
 
 import InspectionForm from './components/InspectionForm';
 import InspectionPage from './pages/InspectionPage';
+
 import ClientForm from './components/ClientForm';
 import ClientPage from './pages/ClientPage';
+
 import EmployeeForm from './components/EmployeeForm';
 import EmployeePage from './pages/EmployeePage';
 
@@ -173,11 +170,6 @@ class App extends Component {
               )}/>
 
 
-              <Route path='/inspections/details' render={() => (
-               <InspectionDetails/>
-              )}/>
-
-
               //clients
               <Route path='/clients/new' render={() => (
                 <ClientForm onSubmit={this.handleClientSubmission} />
@@ -201,10 +193,9 @@ class App extends Component {
               //Authentication
               <Route path='/signin' render={() => (
                  <div>
-                 { auth.isSignedIn() && <Redirect to='/inspections'/> }
 
-                  <LoginForm
-                    onSubmit={this.handleLoginSubmission}/>
+
+                  <LoginForm/>
                  </div>
                )
                }/>
@@ -230,8 +221,3 @@ class App extends Component {
 }
 
 export default App;
-
-
-
-//this goes back to the render InspectionDetails router
-//inspections={inspections} clients={clients} employees={employees}

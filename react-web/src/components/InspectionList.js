@@ -1,14 +1,7 @@
 import React from 'react';
 import Inspection from './Inspection';
-import InspectionDetails from './InspectionDetails'
-import {
-  BrowserRouter as Router,
-  Route,
-  Link,
-  Switch,
-  Redirect
 
-} from 'react-router-dom';
+
 
 
 export default function InspectionList({ inspections, clients, employees }) {
@@ -59,7 +52,7 @@ export default function InspectionList({ inspections, clients, employees }) {
     <div>
 
         <h1>Inspection List</h1>
-        <Link to='/inspections/details'>  { renderInspections() }</Link>
+       { renderInspections() }
 
     </div>
 

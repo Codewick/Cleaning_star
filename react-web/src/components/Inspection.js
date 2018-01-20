@@ -1,7 +1,7 @@
 import React from 'react';
 
 export default function Inspection(props) {
-  const { client, clientName, date, frequency, auditor, comments, employee, employeeName } = props.inspection;
+  const { clientName, date, frequency, auditor, employeeName } = props.inspection;
   console.log(clientName);
   return (
     <div className="inspection">
