@@ -5,7 +5,7 @@ export default function EmployeeList({ employees }) {
   let sortedEmployees = employees.sort((a, b) => a.lastName.localeCompare(b.lastName))
   return (
     <div>
-      <h1>Employee List</h1>
+      <h1 className="heading">Employee List</h1>
       {
         sortedEmployees.map(employee => (
           <div className="row">
@@ -16,7 +16,7 @@ export default function EmployeeList({ employees }) {
                   <div className="employee-list-item">
                     <div className="col s1 m3"></div>
 
-                    <div className="card light-blue accent-4 col s10 m6">
+                    <div className="card grey darken-4 col s10 m6">
                       <span className="white-text">
                         <div className="employee-list-item card-content">
                           <p className="card-title">{employee.lastName}, {employee.firstName}</p>

@@ -4,7 +4,7 @@ import Inspection from './Inspection';
 export default function InspectionList({ inspections }) {
   return (
     <div>
-      <h1>Inspection List</h1>
+      <h1 className="heading">Inspection List</h1>
       {
         inspections.map(inspection => (
           <div className="row">
@@ -14,7 +14,7 @@ export default function InspectionList({ inspections }) {
 
             <span key={inspection._id}>
 
-            <div className="card light-blue accent-4">
+            <div className="card grey darken-4">
               <span className="white-text">
                 <div className="card-content">
                   <div className="card-title">{inspection.client}</div>

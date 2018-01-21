@@ -5,7 +5,7 @@ export default function ClientList({ clients }) {
   let sortedClients = clients.sort((a, b) => a.name.localeCompare(b.name))
   return (
     <div>
-      <h1>Client List</h1>
+      <h1 className="heading">Client List</h1>
       {
         sortedClients.map(client => (
           <div className="row">
@@ -14,7 +14,7 @@ export default function ClientList({ clients }) {
 
                 <span key={client._id}>
 
-                  <div className="card light-blue accent-4">
+                  <div className="card grey darken-4">
                     <span className="white-text">
                       <div className="card-content">
                         <div className="card-title">{client.name}</div>
