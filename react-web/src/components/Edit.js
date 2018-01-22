@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-export default function InspectionForm({ clients, employees, selectedClientObjectID, selectedEmployeeObjectID, onClientValueChange, onEmployeeValueChange, onSubmit }) {
+export default function Edit({ client, inspection, employee, clients, employees, selectedClientObjectID, selectedEmployeeObjectID, onClientValueChange, onEmployeeValueChange, onSubmit }) {
 
   function handleFormSubmission(event) {
     event.preventDefault();
@@ -16,7 +15,6 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
 
   function handleSelectClientValueChange(event) {
     console.log('handleValueChange occurred with event.target.value: ', event.target.value);
-
     onClientValueChange(event.target.value);
   }
 
@@ -60,9 +58,6 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
       }
     });
   };
-
-
-
   return (
     <form onSubmit={handleFormSubmission} >
       <label>
@@ -72,7 +67,7 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
                 id="selection-box-client-options"
                 name="client"
                 onChange={handleSelectClientValueChange}
-                value={selectedClientObjectID ? selectedClientObjectID : ""} // Hack
+                value={selectedClientObjectID ? selectedClientObjectID : client} // Hack
         >
           { clients ? renderClientOptions() : null }
         </select>
@@ -85,7 +80,7 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
                 id="selection-box-employee-options"
                 name="employee"
                 onChange={handleSelectEmployeeValueChange}
-                value={selectedEmployeeObjectID ? selectedEmployeeObjectID : ""} // Hack
+                value={selectedEmployeeObjectID ? selectedEmployeeObjectID : employee.name } // Hack
         >
           { employees ? renderEmployeeOptions() : null }
         </select>
@@ -94,23 +89,23 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
       <label>
         Auditor
         &nbsp;
-        <input type="text" name="auditor"/>
+        <input type="text" name="auditor" value={inspection.auditor} />
       </label>
       &nbsp;
 
       <label>
         date
         &nbsp;
-        <input type="date" name="date"/>
+        <input type="date" name="date" value={inspection.date} />
       </label>
 
       <label>
         Frequency
         &nbsp;
-        <input type="number" name="frequency"/>
+        <input type="number" name="frequency" value={inspection.frequency} />
       </label>
       &nbsp;
-      <button type="submit">Create Inspection</button>
+      <button type="submit">Update Inspection</button>
     </form>
   )
 }
