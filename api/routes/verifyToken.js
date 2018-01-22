@@ -6,9 +6,10 @@ function verifyToken(req, res, next){
     // console.log('in verify token with req.headers: ', req.headers);
     // console.log('in verify token with: ', req.body.token, req.query.token, req.headers['x-access-token']);
     // let token = req.body.token || req.query.token || req.headers['x-access-token'];
-    const token = req.headers.authorization ? req.headers.authorization.split(" ")[1] : null;
+    const token = req.headers.authorization ? req.headers.authorization.split(" ")[1] : undefined;
     console.log('in verify token with token: ', token);
-    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
+    // console.log('is not token: ', !token);
+    if (token == undefined) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
     jwt.verify(token, config.secret, function(err, decodedToken) {
       if (err) {

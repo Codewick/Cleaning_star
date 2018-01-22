@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-
+ Redirect,
  Route,
  Switch
 
@@ -91,11 +91,13 @@ class App extends Component {
 
 
 
-  handleLoginSubmission = ({ email, password }) => {
-    console.log("handleLoginSubmission received", { email, password })
+  handleLoginSubmission = (loginParams) => {
+    let { email, password } = loginParams;
+    // console.log("handleLoginSubmission received", { email, password })
     auth.loginAPI( email, password )
       .then((data) => {
         console.log('signed in', data)
+        console.log('signed in with token', data.token)
         const token = data.token
         if (token) {
           inspectionAPI.all(token)
@@ -103,7 +105,7 @@ class App extends Component {
               this.setState({ inspections, token })
             })
             .catch(error => {
-              console.log(error)
+              console.log('error logging in: ', error)
             })
         }
       })
@@ -192,13 +194,14 @@ class App extends Component {
 
               //Authentication
               <Route path='/signin' render={() => (
-                 <div>
+                <div>
+                { auth.isSignedIn() && <Redirect to='/inspections'/> }
 
-
-                  <LoginForm/>
-                 </div>
-               )
-               }/>
+                  <LoginForm
+                    onSubmit={this.handleLoginSubmission}/>
+                </div>
+              )
+              }/>
 
                <Route path='/signout' render={() => (
                 <SignOutForm

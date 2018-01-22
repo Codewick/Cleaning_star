@@ -18,7 +18,7 @@ const router = express.Router();
 
 // GET http://localhost:7000/inspections
 router.get('/', verifyToken, (req, res) => {
-  // console.log(`request received at inspections GET endpoint ${res.body}`);
+  console.log(`request received at inspections GET endpoint ${res.body}`);
   Inspection.find()
     .populate('worker')
     .then(inspections => {

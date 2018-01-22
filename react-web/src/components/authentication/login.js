@@ -1,6 +1,8 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
+
+
 class LoginForm extends React.Component {
 
   state = {
@@ -25,17 +27,25 @@ class LoginForm extends React.Component {
     const {elements} = event.target;
     const email = elements["email"].value;
     const password = elements["password"].value;
-    this.setState({ email, password })
+    // this.setState({ email, password })
+    // this.setState((prevState) => {
+    //   return {email: email}
+    // });
+    // console.log("State is now: ", this.state.email, this.state.password);
     console.log("Saved input from login form", { email, password })
 
     const errors = this.validate(email, password)
     this.setState({ errors })
     console.log({ errors })
     //if (Object.keys(errors).length > 0) return;
-    //this.setState({ redirect: true })
-    //this.props.onSubmit({ email, password })
-
-
+    this.setState({ redirect: true })
+    var loginParams = {
+      email: email,
+      password: password
+      // ,
+      // blah: "1"
+    }
+    this.props.onSubmit(loginParams)
   }
 
 
