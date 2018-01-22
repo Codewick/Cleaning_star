@@ -1,9 +1,12 @@
 import React from 'react';
 import Inspection from './Inspection';
+import geoFindMe from './Location';
 
 export default function InspectionList({ inspections }) {
   return (
     <div>
+        <button onClick={geoFindMe}>Show my location</button>
+        <div id="out"></div>
       <h1 className="heading">Inspection List</h1>
       {
         inspections.map(inspection => (
