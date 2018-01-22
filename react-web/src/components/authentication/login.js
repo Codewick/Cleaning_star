@@ -27,23 +27,21 @@ class LoginForm extends React.Component {
     const {elements} = event.target;
     const email = elements["email"].value;
     const password = elements["password"].value;
-    // this.setState({ email, password })
-    // this.setState((prevState) => {
-    //   return {email: email}
-    // });
-    // console.log("State is now: ", this.state.email, this.state.password);
-    console.log("Saved input from login form", { email, password })
 
+    console.log("Saved input from login form", { email, password })
     const errors = this.validate(email, password)
-    this.setState({ errors })
     console.log({ errors })
-    //if (Object.keys(errors).length > 0) return;
+
+    // If there are errors, don't do anything more
+    if (Object.keys(errors).length > 0) return
+
+    // There were no errors, and so we can Redirect and inform the parent
+    // components via the props.onSubmit callback
     this.setState({ redirect: true })
     var loginParams = {
       email: email,
       password: password
-      // ,
-      // blah: "1"
+
     }
     this.props.onSubmit(loginParams)
   }
