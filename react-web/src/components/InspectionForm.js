@@ -42,6 +42,7 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
   };
 
   function renderEmployeeOptions() {
+    // sort the employees in alphabetical order
     let sortedEmployees = employees.sort((a, b) => a.lastName.localeCompare(b.lastName))
     return sortedEmployees.map((employee, index) => {
       // Note: ObjectID associated with Mongo object is returned from server as _id
