@@ -51,33 +51,25 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
       // Note: ObjectID associated with Mongo object is returned from server as _id
       if (selectedEmployeeObjectID) {
         return (
-          <option value={employee._id} selected={ selectedEmployeeObjectID == employee._id ? "selected" : ""}>{employee.lastName}, {employee.firstName}</option>
+          <option value={employee._id} selected={ selectedEmployeeObjectID == employee._id ?
+            "selected" : ""}>{employee.lastName}, {employee.firstName}</option>
         )
       } else {
         return (
-          <option value={employee._id} selected={ index == 0 ? "selected" : ""}>{employee.lastName}, {employee.firstName}</option>
+          <option value={employee._id} selected={ index == 0 ?
+            "selected" : ""}>{employee.lastName}, {employee.firstName}</option>
+
+        
         )
       }
     });
   };
 
-  function renderEmployeeOptions() {
-    return employees.map((employee, index) => {
-      // Note: ObjectID associated with Mongo object is returned from server as _id
-      if (selectedEmployeeObjectID) {
-        return (
-          <option value={employee._id} selected={ selectedEmployeeObjectID == employee._id ? "selected" : ""}>{employee.name}</option>
-        )
-      } else {
-        return (
-          <option value={employee._id} selected={ index == 0 ? "selected" : ""}>{employee.name}</option>
-        )
-      }
-    });
-  };
+
 
   return (
     <form onSubmit={handleFormSubmission} >
+
 
       <div className="container">
 
@@ -156,6 +148,7 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
           </button>
 
       </div>
+
     </form>
   )
 }

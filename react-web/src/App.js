@@ -1,18 +1,14 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-
+ Redirect,
  Route,
- Link,
- Switch,
- Redirect
+ Switch
 
 } from 'react-router-dom';
 import './App.css';
 import Nav from './components/Nav';
-import InspectionList from './components/InspectionList';
-import ClientList from './components/ClientList';
-import EmployeeList from './components/EmployeeList';
+
 import * as inspectionAPI from './api/inspections';
 
 import * as clientAPI from './api/clients';
@@ -21,13 +17,18 @@ import * as employeeAPI from './api/employees';
 
 import InspectionForm from './components/InspectionForm';
 import InspectionPage from './pages/InspectionPage';
+
 import ClientForm from './components/ClientForm';
 import ClientPage from './pages/ClientPage';
+
 import EmployeeForm from './components/EmployeeForm';
 import EmployeePage from './pages/EmployeePage';
+import IssuesForm from './components/IssuesForm';
+import Edit from './components/Edit';
+
 
 import LoginForm from './components/authentication/login';
-import * as auth from './api/logins';
+import * as auth from './api/auth';
 
 import SignOutForm from './components/authentication/signout'
 
@@ -41,14 +42,18 @@ class App extends Component {
     selectedClientObjectID: null,
     registrations: null,
     employees: null
-
    }
 
-  componentDidMount() {
+
+  componentDidMount() {                       //making AJAX callto fetch data from API
+
     inspectionAPI.all()
       .then(inspections => {
+        console.dir(inspections)
+        console.log('received inspections from server: ', inspections);
         this.setState({ inspections })
       })
+      .catch(err => { console.log("Ooops!"); console.log(err) })
 
     clientAPI.all()
       .then(clients => {
@@ -93,11 +98,12 @@ class App extends Component {
 
 
 
-  handleLoginSubmission = ({ email, password }) => {
-    console.log("handleLoginSubmission received", { email, password })
+  handleLoginSubmission = (loginParams) => {
+    let { email, password } = loginParams;
     auth.loginAPI( email, password )
       .then((data) => {
         console.log('signed in', data)
+        console.log('signed in with token', data.token)
         const token = data.token
         if (token) {
           inspectionAPI.all(token)
@@ -105,12 +111,23 @@ class App extends Component {
               this.setState({ inspections, token })
             })
             .catch(error => {
-              console.log(error)
+              console.log('error logging in: ', error)
+            })
+
+          clientAPI.all()
+            .then(clients => {
+              this.setState({ clients })
+            })
+
+          employeeAPI.all()
+            .then(employees => {
+              this.setState({ employees })
             })
         }
-      }
-
-    )
+      })
+      .catch(error => {
+        console.log('Failed to sign in with error: ', error);
+      })
   }
 
   handleSignOutSubmission =() => {
@@ -142,16 +159,52 @@ class App extends Component {
     employeeAPI.save(employee);
   }
 
+  handleInspectionUpdateSubmission = (inspection) => {
+
+  }
+
+
   render() {
     const { inspections, clients, selectedClientObjectID, selectedEmployeeObjectID, employees } = this.state;
 
     console.log(`re-rendering with selectedClientObjectID: `, selectedClientObjectID);
+
+
+
 
       return (
         <Router>
           <div className="App">
             <Nav />
             <Switch>
+
+
+            //inspections
+
+            <Route path='/inspections/update/:id' render={  ({ match }) => {
+                console.log('update id', match);
+                const id = match.params.id
+
+                const inspection = !!inspections ? inspections.find((inspection) => inspection._id === id) : {}
+                const client = !!clients && !!inspections ? clients.find((client) => client._id === inspection.client) : {}
+                const employee = !!employees && !!inspections ? employees.find((employee) => employee._id === inspection.employee) : {}
+                return (
+              <Edit
+                employee={employee}
+                inspection={inspection}
+                client={client}
+                clients={clients}
+                employees={employees}
+                selectedClientObjectID={selectedClientObjectID}
+                selectedEmployeeObjectID={selectedEmployeeObjectID}
+                onClientValueChange={this.handleSelectClientValueChange}
+                onEmployeeValueChange={this.handleSelectEmployeeValueChange}
+                onSubmit={this.handleInspectionUpdateSubmission}
+              />
+            )}} />
+
+
+
               <Route path='/inspections/new' render={() => (
                 <InspectionForm
                   clients={clients}
@@ -164,10 +217,13 @@ class App extends Component {
                 />
               )}/>
 
+
               <Route path='/inspections' render={() => (
-               <InspectionPage inspections={inspections} clients={clients} employees={employees} />
+                <InspectionPage inspections={inspections} clients={clients} employees={employees} />
               )}/>
 
+
+              //clients
               <Route path='/clients/new' render={() => (
                 <ClientForm onSubmit={this.handleClientSubmission} />
               )}/>
@@ -175,6 +231,7 @@ class App extends Component {
               <Route path='/clients' render={() => (
                <ClientPage clients={clients}/>
               )}/>
+
 
               // employees
               <Route path='/employees/new' render={() => (
@@ -185,16 +242,17 @@ class App extends Component {
                 <EmployeePage employees={employees}/>
               )}/>
 
+
               //Authentication
               <Route path='/signin' render={() => (
-                 <div>
-                 { auth.isSignedIn() && <Redirect to='/inspections'/> }
+                <div>
+                { auth.isSignedIn() && <Redirect to='/inspections'/> }
 
                   <LoginForm
                     onSubmit={this.handleLoginSubmission}/>
-                 </div>
-               )
-               }/>
+                </div>
+              )
+              }/>
 
                <Route path='/signout' render={() => (
                 <SignOutForm

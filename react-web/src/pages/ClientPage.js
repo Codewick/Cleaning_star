@@ -15,10 +15,13 @@ export default ({ clients }) => (
             return (<p>Client Not Found! ({id})</p>)
           }
           return (<Client {...client} />)
-        }} />
-        <Route path='/clients' render={() => (
+        }}
+      />
+      <Route path='/clients' render={
+        () => (
           <ClientList clients={clients} />
-      )} />
+        )}
+      />
     </Switch>
   ) : (
         "Loading..."
