@@ -41,7 +41,40 @@ export default function InspectionList({ inspections, clients, employees }) {
     // console.log(inspections)
     return inspections.map(inspection => {
 
-      return inspection ? (<Inspection key={inspection._id} inspection={inspection} />) : null
+      // return inspection ? (<Inspection key={inspection._id} inspection={inspection} />) : null
+
+      if (inspection) {
+        return (
+          <div className="row">
+
+            <div className="col s1 m3"></div>
+            <div className="col s10 m6">
+
+              <span key={inspection._id}>
+
+              <div className="card grey darken-4">
+                <span className="white-text">
+                  <div className="card-content">
+                    <div className="card-title">{inspection.client.name}</div>
+                    <p>{inspection.employee.lastName}</p>
+                    <p>{inspection.date}</p>
+                    <p>{inspection.frequency}</p>
+                    <p>{inspection.auditor}</p>
+                  </div>
+                </span>
+              </div>
+
+              </span>
+
+            </div>
+
+            <div className="col s1 m3"></div>
+
+          </div>
+        )
+      } else {
+        return null
+      }
 
     })
   }

@@ -1,5 +1,4 @@
-
-.App {
+* {
   text-align: center;
 }
 
@@ -98,4 +97,3 @@ body {
 .picker__today { color: #00b0ff; }
 .picker__clear { /* If you want to customize */ }
 .picker__close { color: #00b0ff; }
-
