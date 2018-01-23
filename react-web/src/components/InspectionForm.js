@@ -45,7 +45,9 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
   };
 
   function renderEmployeeOptions() {
-    return employees.map((employee, index) => {
+    // sort the employees in alphabetical order
+    let sortedEmployees = employees.sort((a, b) => a.lastName.localeCompare(b.lastName))
+    return sortedEmployees.map((employee, index) => {
       // Note: ObjectID associated with Mongo object is returned from server as _id
       if (selectedEmployeeObjectID) {
         return (
@@ -56,6 +58,8 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
         return (
           <option value={employee._id} selected={ index == 0 ?
             "selected" : ""}>{employee.lastName}, {employee.firstName}</option>
+
+        
         )
       }
     });
@@ -77,6 +81,9 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
           { clients ? renderClientOptions() : null }
         </select>
       </label>
+
+
+
 
       <label>
         worker
@@ -110,7 +117,9 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
         <input type="number" name="frequency"/>
       </label>
       &nbsp;
-      <button type="submit">Create Inspection</button>
+      <button className="btn waves-effect waves-light orange darken-2" type="submit">
+        Create Inspection<i className="material-icons right">send</i>
+      </button>
     </form>
   )
 }

@@ -55,10 +55,13 @@ export default function InspectionList({ inspections, clients, employees }) {
   //   </div>
   // ))
 
-  return (
-    <div>
+ 
+
+      return (
+      <div>
       <h1>Inspection List</h1>
       { renderInspections() }
+
     </div>
   )
 }

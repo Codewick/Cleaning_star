@@ -28,7 +28,10 @@ export default function Employee(props) {
   return (
     <div className="employee">
       <span>
-        Name: {firstName} {lastName}
+        FirstName: {firstName}
+      </span>
+      <span>
+        LastName: {lastName}
       </span>
       <span>Contact: {contact_number}</span>
       <Link to={`/employees/delete/${props._id}`} onClick={deleteEmployee}>Delete</Link>&nbsp;

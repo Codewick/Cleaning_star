@@ -29,6 +29,7 @@ export default function Inspection(props) {
 
   return (
     <div className="inspection">
+    
       <span>
         Client: {clientName}
       </span>&nbsp;

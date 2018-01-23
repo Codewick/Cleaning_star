@@ -1,14 +1,21 @@
 import React, { Component } from 'react';
 import {
   BrowserRouter as Router,
-  Route,
-  Switch
+
+ Route,
+ Link,
+ Switch,
+ Redirect
+
 } from 'react-router-dom';
 import './App.css';
 import Nav from './components/Nav';
 import * as inspectionAPI from './api/inspections';
+
 import * as clientAPI from './api/clients';
+
 import * as employeeAPI from './api/employees';
+
 import InspectionForm from './components/InspectionForm';
 import InspectionPage from './pages/InspectionPage';
 import ClientForm from './components/ClientForm';
@@ -19,12 +26,22 @@ import IssuesForm from './components/IssuesForm';
 import Edit from './components/Edit';
 
 
+import LoginForm from './components/authentication/login';
+import * as auth from './api/logins';
+
+import SignOutForm from './components/authentication/signout'
+
+import RegisterForm from './components/authentication/register';
+import * as registerAPI from './api/registrations';
+
 class App extends Component {
   state = {
     inspections: null,
     clients: null,
-    employees: null,
-    selectedClientObjectID: null
+    selectedClientObjectID: null,
+    registrations: null,
+    employees: null
+
    }
 
   componentDidMount() {                       //making AJAX callto fetch data from API
@@ -73,6 +90,43 @@ class App extends Component {
     console.log(inspection);
     inspectionAPI.save(inspection);
   }
+
+
+
+  handleLoginSubmission = ({ email, password }) => {
+    console.log("handleLoginSubmission received", { email, password })
+    auth.loginAPI( email, password )
+      .then((data) => {
+        console.log('signed in', data)
+        const token = data.token
+        if (token) {
+          inspectionAPI.all(token)
+            .then(inspections => {
+              this.setState({ inspections, token })
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        }
+      }
+
+    )
+  }
+
+  handleSignOutSubmission =() => {
+    auth.signOut()
+    this.setState({inspections:null})
+  }
+
+
+  handleRegisterSubmission = ( registration ) => {
+    this.setState(({ registrations }) => (
+      { registrations: [ registration ].concat(registrations) }
+    ));
+    console.log(registration);
+    registerAPI.save(registration);
+  }
+
 
   handleClientSubmission = (client) => {
     this.setState(({ clients }) => (
@@ -161,10 +215,35 @@ class App extends Component {
                 <EmployeePage employees={employees}/>
               )}/>
 
+              //Authentication
+              <Route path='/signin' render={() => (
+                 <div>
+                 { auth.isSignedIn() && <Redirect to='/inspections'/> }
+
+                  <LoginForm
+                    onSubmit={this.handleLoginSubmission}/>
+                 </div>
+               )
+               }/>
+
+               <Route path='/signout' render={() => (
+                <SignOutForm
+                  onSignOut={this.handleSignOutSubmission}/>
+                 )
+               }/>
+
+               <Route path='/register' render={() => (
+                <RegisterForm
+                  onSubmit={this.handleRegisterSubmission}/>
+                 )
+               }/>
+
+
             </Switch>
           </div>
       </Router>
     );
   }
 }
+
 export default App;

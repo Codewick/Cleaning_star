@@ -17,6 +17,9 @@ export default function Nav(props) {
               <li><Link to='/clients'>Show Clients</Link></li>
               <li><Link to='/employees/new'>Add Employees</Link></li>
               <li><Link to='/employees'>Show Employees</Link></li>
+              <li><Link to='/signin'>Log In</Link></li>
+              <li><Link to='/signout'>Sign Out</Link></li>
+              <li><Link to='/register'>New user</Link></li>
             </ul>
           </div> {/* end nav-wrapper container div */}
         </nav>
@@ -32,7 +35,11 @@ export default function Nav(props) {
         <li className="grey lighten-3">Employees</li>
         <li><Link to='/employees/new'>Add Employees</Link></li>
         <li><Link to='/employees'>Show Employees</Link></li>
+        <li><Link to='/signin'>Log In</Link></li>
+        <li><Link to='/signout'>Sign Out</Link></li>
+        <li><Link to='/register'>New user</Link></li>
       </ul>
+
     </div>
   )
 }
