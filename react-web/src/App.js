@@ -41,12 +41,22 @@ class App extends Component {
     employees: null
    }
 
+
+
+
+
+
+
+
+
   componentDidMount() {
     inspectionAPI.all()
       .then(inspections => {
+        console.dir(inspections)
         console.log('received inspections from server: ', inspections);
         this.setState({ inspections })
       })
+      .catch(err => { console.log("Ooops!"); console.log(err) })
 
     clientAPI.all()
       .then(clients => {
@@ -93,7 +103,6 @@ class App extends Component {
 
   handleLoginSubmission = (loginParams) => {
     let { email, password } = loginParams;
-    // console.log("handleLoginSubmission received", { email, password })
     auth.loginAPI( email, password )
       .then((data) => {
         console.log('signed in', data)
@@ -106,6 +115,16 @@ class App extends Component {
             })
             .catch(error => {
               console.log('error logging in: ', error)
+            })
+
+          clientAPI.all()
+            .then(clients => {
+              this.setState({ clients })
+            })
+
+          employeeAPI.all()
+            .then(employees => {
+              this.setState({ employees })
             })
         }
       })
@@ -147,6 +166,9 @@ class App extends Component {
     const { inspections, clients, selectedClientObjectID, selectedEmployeeObjectID, employees } = this.state;
 
     console.log(`re-rendering with selectedClientObjectID: `, selectedClientObjectID);
+
+
+
 
       return (
         <Router>

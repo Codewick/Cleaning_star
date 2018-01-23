@@ -1,7 +1,7 @@
 import { token } from './auth'
 
 export function all() {
-  console.log('TOKEN TO BE SENT TO SERVER: ', token())
+  // console.log('TOKEN TO BE SENT TO SERVER: ', token())
   return fetch('/inspections', {
     method: 'GET',
     headers: {
@@ -9,10 +9,10 @@ export function all() {
       'Authorization': `Bearer ${token()}`
     }
   })
-  // .then(res => res.json())
   .then(res => res.json())
-  .catch(error => {
-    console.log(`response from backend error: ${error}`);
+  .then(json => {
+    if (Array.isArray(json)) return json
+    throw "Invalid token"
   })
 }
 

@@ -31,7 +31,7 @@ class LoginForm extends React.Component {
     console.log("Saved input from login form", { email, password })
     const errors = this.validate(email, password)
     console.log({ errors })
-
+    
     // If there are errors, don't do anything more
     if (Object.keys(errors).length > 0) return
 

@@ -9,7 +9,7 @@ function verifyToken(req, res, next){
     const token = req.headers.authorization ? req.headers.authorization.split(" ")[1] : undefined;
     console.log('in verify token with token: ', token);
     // console.log('is not token: ', !token);
-    if (token == undefined) return res.status(401).send({ auth: false, message: 'No token provided.' });
+    if (token === undefined) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
     jwt.verify(token, config.secret, function(err, decodedToken) {
       if (err) {

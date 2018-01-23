@@ -7,14 +7,7 @@ const bcrypt = require('bcryptjs');
 const verifyToken = require('./verifyToken');
 const router = express.Router();
 
-// const authorize = (req, res, next) => {
-//   next(); return;
-//   if (req.user) {
-//     next();
-//   } else {
-//     res.status(403).end();
-//   }
-// }
+
 
 // GET http://localhost:7000/inspections
 router.get('/', verifyToken, (req, res) => {

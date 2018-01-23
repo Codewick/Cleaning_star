@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const config = require('./config');
 const User = require('./models/user')
+const userHandlers = require('./routes/passwords.js');
+
 //const authMiddleware = require('./middleware/auth');
 
 // Create the app
@@ -27,13 +29,23 @@ app.use('/user/new', signup);
 const login = require('./routes/login');
 app.use('/login', login);
 
+const forgotPassword = require('./routes/passwords')
+app.use('/forgot_password', forgotPassword);
+//   .get(userHandlers.render_forgot_password_template)
+//   .post(userHandlers.forgot_password);
+//
+// const resetPassword = require('./routes/passwords')
+// app.use('/reset_password')
+//   .get(userHandlers.render_reset_password_template)
+//   .post(userHandlers.reset_password);
+
 
 
 // TO-DO - potentially move into a router
-app.get('/user', (req, res) => {
-  User.find({}, (err, user) => {
-    res.json(user);
-  })
-});
+// app.get('/user', (req, res) => {
+//   User.find({}, (err, user) => {
+//     res.json(user);
+//   })
+// });
 
 module.exports = app;

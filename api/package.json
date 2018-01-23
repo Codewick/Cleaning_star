@@ -8,6 +8,8 @@
     "express-session": "^1.15.6",
     "jsonwebtoken": "^8.1.0",
     "mongoose": "^4.13.7",
+    "nodemailer": "^4.4.2",
+    "nodemailer-express-handlebars": "^2.0.0",
     "passport": "^0.4.0",
     "passport-jwt": "^3.0.1",
     "passport-local": "^1.0.0",
