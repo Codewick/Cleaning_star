@@ -73,3 +73,29 @@ body {
   box-shadow: 0 1px 0 0 #00b0ff;
 }
 
+
+/*datepicker*/
+.picker__date-display {
+  background-color: #00b0ff;
+}
+.picker__weekday-display {
+  background-color: #0091ea;
+}
+.picker__day--selected, .picker__day--selected:hover, .picker--focused .picker__day--selected {
+  background-color: #00b0ff;
+}
+/* Buttons of actions */
+.picker__nav--prev:hover { background-color: #fff3e0; }
+.picker__nav--next:hover { background-color: #fff3e0; }
+.picker__nav--prev:before {
+  border-left: 0;
+  border-right: 0.75em solid #0091ea;
+}
+.picker__nav--next:before {
+  border-right: 0;
+  border-left: 0.75em solid #0091ea;
+}
+.picker__today { color: #00b0ff; }
+.picker__clear { /* If you want to customize */ }
+.picker__close { color: #00b0ff; }
+

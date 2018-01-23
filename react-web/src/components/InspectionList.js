@@ -40,9 +40,12 @@ export default function InspectionList({ inspections, clients, employees }) {
     inspections = modifyInspections();
     // console.log(inspections)
     return inspections.map(inspection => {
+
       return inspection ? (<Inspection key={inspection._id} inspection={inspection} />) : null
+
     })
   }
+
 
 
 
