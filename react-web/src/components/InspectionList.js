@@ -1,5 +1,6 @@
 import React from 'react';
 import Inspection from './Inspection';
+import Map from './Map';
 
 export default function InspectionList({ inspections, clients, employees }) {
 
@@ -56,6 +57,11 @@ export default function InspectionList({ inspections, clients, employees }) {
 
   return (
     <div>
+      <Map
+        zoom={8}
+        containerElement= {<div style={{width: 400, height: 400}}/>}
+        mapElement={<div style={{width: 400, height: 400}}/>}
+      />
       <h1>Inspection List</h1>
       { renderInspections() }
     </div>
