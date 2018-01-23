@@ -3,8 +3,7 @@ import { Link } from 'react-router-dom';
 
 export default function Client(props) {
   console.log(props);
-  const { client, name, _id } = props;
-
+  const { client, name, _id, address, contact_number, e_mail, contact_person } = props;
   function deleteClient() {
     let url;
     url = `/clients/${props._id}`
@@ -25,7 +24,7 @@ export default function Client(props) {
     })
   }
 
-  const { name, address, contact_number, e_mail, contact_person } = props;
+
   return (
     <div className="client">
       <span>
