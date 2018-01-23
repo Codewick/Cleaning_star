@@ -10,9 +10,6 @@ import {
 } from 'react-router-dom';
 import './App.css';
 import Nav from './components/Nav';
-import InspectionList from './components/InspectionList';
-import ClientList from './components/ClientList';
-import EmployeeList from './components/EmployeeList';
 import * as inspectionAPI from './api/inspections';
 
 import * as clientAPI from './api/clients';
@@ -25,6 +22,9 @@ import ClientForm from './components/ClientForm';
 import ClientPage from './pages/ClientPage';
 import EmployeeForm from './components/EmployeeForm';
 import EmployeePage from './pages/EmployeePage';
+import IssuesForm from './components/IssuesForm';
+import Edit from './components/Edit';
+
 
 import LoginForm from './components/authentication/login';
 import * as auth from './api/logins';
@@ -44,7 +44,7 @@ class App extends Component {
 
    }
 
-  componentDidMount() {
+  componentDidMount() {                       //making AJAX callto fetch data from API
     inspectionAPI.all()
       .then(inspections => {
         this.setState({ inspections })
@@ -142,6 +142,11 @@ class App extends Component {
     employeeAPI.save(employee);
   }
 
+  handleInspectionUpdateSubmission = (inspection) => {
+
+  }
+
+
   render() {
     const { inspections, clients, selectedClientObjectID, selectedEmployeeObjectID, employees } = this.state;
 
@@ -152,6 +157,30 @@ class App extends Component {
           <div className="App">
             <Nav />
             <Switch>
+
+            <Route path='/inspections/update/:id' render={  ({ match }) => {
+                console.log('update id', match);
+                const id = match.params.id
+
+                const inspection = !!inspections ? inspections.find((inspection) => inspection._id === id) : {}
+                const client = !!clients && !!inspections ? clients.find((client) => client._id === inspection.client) : {}
+                const employee = !!employees && !!inspections ? employees.find((employee) => employee._id === inspection.employee) : {}
+                return (
+              <Edit
+                employee={employee}
+                inspection={inspection}
+                client={client}
+                clients={clients}
+                employees={employees}
+                selectedClientObjectID={selectedClientObjectID}
+                selectedEmployeeObjectID={selectedEmployeeObjectID}
+                onClientValueChange={this.handleSelectClientValueChange}
+                onEmployeeValueChange={this.handleSelectEmployeeValueChange}
+                onSubmit={this.handleInspectionUpdateSubmission}
+              />
+            )}} />
+
+
               <Route path='/inspections/new' render={() => (
                 <InspectionForm
                   clients={clients}
@@ -163,6 +192,7 @@ class App extends Component {
                   onSubmit={this.handleInspectionSubmission}
                 />
               )}/>
+
 
               <Route path='/inspections' render={() => (
                <InspectionPage inspections={inspections} clients={clients} employees={employees} />

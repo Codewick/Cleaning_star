@@ -6,6 +6,7 @@ export default function EmployeeList({ employees }) {
   return (
     <div>
       <h1 className="heading">Employee List</h1>
+
       {
         sortedEmployees.map(employee => (
           <div className="row">
