@@ -23,4 +23,11 @@ router.post('/',verifyToken, (req, res) => {
     .catch(error => res.json({ error }))
 });
 
+router.delete('/:id', function(req, res, next) {
+  Employee.findByIdAndRemove(req.params.id, req.body, function (err, employee) {
+    if (err) return next(err);
+    res.json(employee);
+  });
+});
+
 module.exports = router;

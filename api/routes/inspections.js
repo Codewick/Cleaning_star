@@ -32,4 +32,29 @@ router.post('/', verifyToken, (req, res) => {
     .catch(error => res.json({ error }))
 });
 
+/* GET SINGLE Inspection BY ID */
+router.get('/:id', function(req, res, next) {
+  Inspection.findById(req.params.id, function (err, inspection) {
+    if (err) return next(err);
+    res.json(inspection);
+  });
+});
+
+/* UPDATE Inspection */
+router.put('/:id', function(req, res, next) {
+  Inspection.findByIdAndUpdate(req.params.id, req.body, function (err, inspection) {
+    if (err) return next(err);
+    res.json(inspection);
+  });
+});
+
+/* DELETE Inspection */
+router.delete('/:id', function(req, res, next) {
+  Inspection.findByIdAndRemove(req.params.id, req.body, function (err, inspection) {
+    if (err) return next(err);
+    res.json(inspection);
+  });
+});
+
+
 module.exports = router;

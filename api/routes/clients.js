@@ -24,4 +24,12 @@ router.post('/', verifyToken, (req, res) => {
     .catch(error => res.json({ error }))
 });
 
+/* DELETE client */
+router.delete('/:id', function(req, res, next) {
+  Client.findByIdAndRemove(req.params.id, req.body, function (err, client) {
+    if (err) return next(err);
+    res.json(client);
+  });
+});
+
 module.exports = router;

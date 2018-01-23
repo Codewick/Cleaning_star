@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-export default function InspectionForm({ clients, employees, selectedClientObjectID, selectedEmployeeObjectID, onClientValueChange, onEmployeeValueChange, onSubmit }) {
+export default function Edit({ client, inspection, employee, clients, employees, selectedClientObjectID, selectedEmployeeObjectID, onClientValueChange, onEmployeeValueChange, onSubmit }) {
 
   function handleFormSubmission(event) {
     event.preventDefault();
@@ -16,7 +15,6 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
 
   function handleSelectClientValueChange(event) {
     console.log('handleValueChange occurred with event.target.value: ', event.target.value);
-
     onClientValueChange(event.target.value);
   }
 
@@ -45,9 +43,7 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
   };
 
   function renderEmployeeOptions() {
-    // sort the employees in alphabetical order
-    let sortedEmployees = employees.sort((a, b) => a.lastName.localeCompare(b.lastName))
-    return sortedEmployees.map((employee, index) => {
+    return employees.map((employee, index) => {
       // Note: ObjectID associated with Mongo object is returned from server as _id
       if (selectedEmployeeObjectID) {
         return (
@@ -58,15 +54,10 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
         return (
           <option value={employee._id} selected={ index == 0 ?
             "selected" : ""}>{employee.lastName}, {employee.firstName}</option>
-
-        
         )
       }
     });
   };
-
-
-
   return (
     <form onSubmit={handleFormSubmission} >
       <label>
@@ -76,14 +67,11 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
                 id="selection-box-client-options"
                 name="client"
                 onChange={handleSelectClientValueChange}
-                value={selectedClientObjectID ? selectedClientObjectID : ""} // Hack
+                value={selectedClientObjectID ? selectedClientObjectID : client} // Hack
         >
           { clients ? renderClientOptions() : null }
         </select>
       </label>
-
-
-
 
       <label>
         worker
@@ -92,7 +80,7 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
                 id="selection-box-employee-options"
                 name="employee"
                 onChange={handleSelectEmployeeValueChange}
-                value={selectedEmployeeObjectID ? selectedEmployeeObjectID : ""} // Hack
+                value={selectedEmployeeObjectID ? selectedEmployeeObjectID : employee.name } // Hack
         >
           { employees ? renderEmployeeOptions() : null }
         </select>
@@ -101,25 +89,23 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
       <label>
         Auditor
         &nbsp;
-        <input type="text" name="auditor"/>
+        <input type="text" name="auditor" value={inspection.auditor} />
       </label>
       &nbsp;
 
       <label>
         date
         &nbsp;
-        <input type="date" name="date"/>
+        <input type="date" name="date" value={inspection.date} />
       </label>
 
       <label>
         Frequency
         &nbsp;
-        <input type="number" name="frequency"/>
+        <input type="number" name="frequency" value={inspection.frequency} />
       </label>
       &nbsp;
-      <button className="btn waves-effect waves-light orange darken-2" type="submit">
-        Create Inspection<i className="material-icons right">send</i>
-      </button>
+      <button type="submit">Update Inspection</button>
     </form>
   )
 }

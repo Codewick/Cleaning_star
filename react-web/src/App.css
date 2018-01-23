@@ -23,3 +23,53 @@
 .App-intro {
   font-size: large;
 }
+
+
+@keyframes App-logo-spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+html, body {
+  max-width: 100%;
+  overflow-x: hidden;
+} /* This disables horizontal scrolling */
+
+/*main page*/
+body {
+  background-color: #eeeeee;
+}
+
+/*employee list*/
+.employee-list-item {
+  padding-top: 20px;
+}
+
+/*clientlist*/
+.client-name {
+  margin-top: 40px;
+}
+
+/*all labels*/
+.input-field label {
+  color: #000;
+}
+
+.input-field input[type=text]:focus + label {
+  color: #00b0ff;
+}
+
+.input-field input[type=text]:focus {
+  border-bottom: 1px solid #00b0ff;
+  box-shadow: 0 1px 0 0 #00b0ff;
+}
+
+.input-field input[type=number]:focus + label {
+  color: #00b0ff;
+}
+
+.input-field input[type=number]:focus {
+  border-bottom: 1px solid #00b0ff;
+  box-shadow: 0 1px 0 0 #00b0ff;
+}
+
