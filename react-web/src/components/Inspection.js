@@ -41,7 +41,6 @@ export default function Inspection(props) {
       <span>Comments: {comments}</span>&nbsp;
       <Link to={`/inspections/${props.inspection._id}`}>Show</Link>&nbsp;
       <Link to={`/inspections/delete/${props.inspection._id}`} onClick={deleteInspection}>Delete</Link>&nbsp;
-      <Link to={`/inspections/update/${props.inspection._id}`}>Update</Link>
     </div>
   )
 }
