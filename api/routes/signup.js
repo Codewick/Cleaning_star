@@ -10,7 +10,7 @@ const router = express.Router();
 // Registers a user and returns the user that was created as hash.
 // Note that token generation only occurs when the user performs login (not registration)
 // localhost:7000/register
-router.post('/', verifyToken, (req, res) => {
+router.post('/', (req, res) => {
 
   User.create({
     firstName: req.body.firstName,
