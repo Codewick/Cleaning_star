@@ -10,7 +10,6 @@ const inspectionSchema = Schema({
   frequency: Number,
   auditor: String,
   comments: String,
-  date: Date,
   employee: { type: ObjectId, ref: 'Employee'}
 });
 

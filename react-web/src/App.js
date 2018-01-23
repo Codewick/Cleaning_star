@@ -110,7 +110,7 @@ class App extends Component {
 
                 const inspection = !!inspections ? inspections.find((inspection) => inspection._id === id) : {}
                 const client = !!clients && !!inspections ? clients.find((client) => client._id === inspection.client) : {}
-                const employee = !!employees && !!inspections ? employees.find((employee) => employee._id === inspection.employee) : {}              
+                const employee = !!employees && !!inspections ? employees.find((employee) => employee._id === inspection.employee) : {}
                 return (
               <Edit
                 employee={employee}
