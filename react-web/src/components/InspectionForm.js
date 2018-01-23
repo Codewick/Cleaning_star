@@ -78,57 +78,84 @@ export default function InspectionForm({ clients, employees, selectedClientObjec
 
   return (
     <form onSubmit={handleFormSubmission} >
-      <label>
-        Client
-        &nbsp;
-        <select class="browser-default"
-                id="selection-box-client-options"
-                name="client"
-                onChange={handleSelectClientValueChange}
-                value={selectedClientObjectID ? selectedClientObjectID : ""} // Hack
-        >
-          { clients ? renderClientOptions() : null }
-        </select>
-      </label>
+
+      <div className="container">
+
+        <div className="row">
+          <div className="col m2"></div>
+            <div className="input-field col s12 m8">
+
+              <p><label>Client Select</label></p>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <select className="browser-default"
+                      id="selection-box-client-options"
+                      name="client"
+                      onChange={handleSelectClientValueChange}
+                      value={selectedClientObjectID ? selectedClientObjectID : ""} // Hack
+              >
+                { clients ? renderClientOptions() : null }
+              </select>
+
+            </div>
+          <div className="col m2"></div>
+        </div> {/* end row div */}
 
 
 
+        <div className="row">
+          <div className="col m2"></div>
+            <div className="input-field col s12 m8">
 
-      <label>
-        worker
-        &nbsp;
-        <select class="browser-default"
-                id="selection-box-employee-options"
-                name="employee"
-                onChange={handleSelectEmployeeValueChange}
-                value={selectedEmployeeObjectID ? selectedEmployeeObjectID : ""} // Hack
-        >
-          { employees ? renderEmployeeOptions() : null }
-        </select>
-      </label>
+              <p><label>Employee Select</label></p>
+              &nbsp;&nbsp;&nbsp;&nbsp;
+              <select className="browser-default"
+                      id="selection-box-employee-options"
+                      name="employee"
+                      onChange={handleSelectEmployeeValueChange}
+                      value={selectedEmployeeObjectID ? selectedEmployeeObjectID : ""} // Hack
+              >
+                { employees ? renderEmployeeOptions() : null }
+              </select>
+            </div>
 
-      <label>
-        Auditor
-        &nbsp;
-        <input type="text" name="auditor"/>
-      </label>
-      &nbsp;
+            <div className="col m2"></div>
+          </div> {/* end row div */}
 
-      <label>
-        Auditor
-        &nbsp;
-        <input type="date" name="date"/>
-      </label>
+          <div className="row">
+            <div className="col m2"></div>
+              <div className="input-field col s12 m8">
+                <input id="auditor" name="auditor" type="text" className="validate"/>
+                <label for="auditor">Auditor</label>
+              </div>
+            <div className="col m2"></div>
+          </div> {/* end row div */}
 
-      <label>
-        Frequency
-        &nbsp;
-        <input type="number" name="frequency"/>
-      </label>
-      &nbsp;
-      <button className="btn waves-effect waves-light orange darken-2" type="submit">
-        Create Inspection<i className="material-icons right">send</i>
-      </button>
+
+
+          <div className="row">
+            <div className="col m2"></div>
+            <div className="input-field col s12 m8">
+              <input id="date" name="date" type="date" className="datepicker validate" />
+              <label for="date">Calendar Date</label>
+            </div>
+            <div className="col m2"></div>
+          </div>
+
+          <div className="row">
+            <div className="col m2"></div>
+              <div className="input-field col s12 m8">
+                <input id="frequency" name="frequency" type="number" className="validate"/>
+                <label for="frequency">Frequency</label>
+              </div>
+            <div className="col m2"></div>
+          </div> {/* end row div */}
+
+
+          <button className="btn waves-effect waves-light orange darken-2" type="submit">
+            Create Inspection<i className="material-icons right">send</i>
+          </button>
+
+      </div>
     </form>
   )
 }
