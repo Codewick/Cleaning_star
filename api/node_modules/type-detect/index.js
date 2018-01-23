@@ -8,6 +8,16 @@ const promiseExists = typeof Promise === 'function';
 /* eslint-disable no-undef */
 const globalObject = typeof self === 'object' ? self : global; // eslint-disable-line id-blacklist
 
+/*
+ * All of these attributes must be available on the global object for the current environment
+ * to be considered a DOM environment (browser)
+ */
+const isDom = typeof window === 'object' &&
+  'document' in window &&
+  'navigator' in window &&
+  'HTMLElement' in window;
+/* eslint-enable */
+
 const symbolExists = typeof Symbol !== 'undefined';
 const mapExists = typeof Map !== 'undefined';
 const setExists = typeof Set !== 'undefined';
@@ -26,14 +36,6 @@ const stringIteratorExists = symbolIteratorExists && typeof String.prototype[Sym
 const stringIteratorPrototype = stringIteratorExists && Object.getPrototypeOf(''[Symbol.iterator]());
 const toStringLeftSliceLength = 8;
 const toStringRightSliceLength = -1;
-const windowExists = typeof window === 'object';
-const windowLocationExists = windowExists && typeof window.location === 'object';
-const windowDocumentExists = windowExists && typeof window.document === 'object';
-const windowNavigatorExists = windowExists && typeof window.navigator === 'object';
-const windowNavigatorMimeTypesExists = windowNavigatorExists && typeof window.navigator.mimeTypes === 'object';
-const windowNavigatorPluginsExists = windowNavigatorExists && typeof window.navigator.plugins === 'object';
-const windowHTMLElementExists = windowExists &&
-  (typeof window.HTMLElement === 'function' || typeof window.HTMLElement === 'object');
 /**
  * ### typeOf (obj)
  *
@@ -107,7 +109,7 @@ export default function typeDetect(obj) {
     return 'Array';
   }
 
-  if (windowExists) {
+  if (isDom) {
     /* ! Spec Conformance
      * (https://html.spec.whatwg.org/multipage/browsers.html#location)
      * WhatWG HTML$7.7.3 - The `Location` interface
@@ -115,7 +117,7 @@ export default function typeDetect(obj) {
      *  - IE <=11 === "[object Object]"
      *  - IE Edge <=13 === "[object Object]"
      */
-    if (windowLocationExists && obj === window.location) {
+    if (obj === globalObject.location) {
       return 'Location';
     }
 
@@ -138,7 +140,7 @@ export default function typeDetect(obj) {
      *  - IE 11 === "[object HTMLDocument]"
      *  - IE Edge <=13 === "[object HTMLDocument]"
      */
-    if (windowDocumentExists && obj === window.document) {
+    if (obj === globalObject.document) {
       return 'Document';
     }
 
@@ -148,7 +150,7 @@ export default function typeDetect(obj) {
      * Test: `Object.prototype.toString.call(navigator.mimeTypes)``
      *  - IE <=10 === "[object MSMimeTypesCollection]"
      */
-    if (windowNavigatorMimeTypesExists && obj === window.navigator.mimeTypes) {
+    if (obj === (globalObject.navigator || {}).mimeTypes) {
       return 'MimeTypeArray';
     }
 
@@ -158,52 +160,50 @@ export default function typeDetect(obj) {
      * Test: `Object.prototype.toString.call(navigator.plugins)``
      *  - IE <=10 === "[object MSPluginsCollection]"
      */
-    if (windowNavigatorPluginsExists && obj === window.navigator.plugins) {
+    if (obj === (globalObject.navigator || {}).plugins) {
       return 'PluginArray';
     }
 
-    if (windowHTMLElementExists && obj instanceof window.HTMLElement) {
-      /* ! Spec Conformance
-      * (https://html.spec.whatwg.org/multipage/webappapis.html#pluginarray)
-      * WhatWG HTML$4.4.4 - The `blockquote` element - Interface `HTMLQuoteElement`
-      * Test: `Object.prototype.toString.call(document.createElement('blockquote'))``
-      *  - IE <=10 === "[object HTMLBlockElement]"
-      */
-      if (obj.tagName === 'BLOCKQUOTE') {
-        return 'HTMLQuoteElement';
-      }
+    /* ! Spec Conformance
+     * (https://html.spec.whatwg.org/multipage/webappapis.html#pluginarray)
+     * WhatWG HTML$4.4.4 - The `blockquote` element - Interface `HTMLQuoteElement`
+     * Test: `Object.prototype.toString.call(document.createElement('blockquote'))``
+     *  - IE <=10 === "[object HTMLBlockElement]"
+     */
+    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'BLOCKQUOTE') {
+      return 'HTMLQuoteElement';
+    }
 
-      /* ! Spec Conformance
-       * (https://html.spec.whatwg.org/#htmltabledatacellelement)
-       * WhatWG HTML$4.9.9 - The `td` element - Interface `HTMLTableDataCellElement`
-       * Note: Most browsers currently adher to the W3C DOM Level 2 spec
-       *       (https://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-82915075)
-       *       which suggests that browsers should use HTMLTableCellElement for
-       *       both TD and TH elements. WhatWG separates these.
-       * Test: Object.prototype.toString.call(document.createElement('td'))
-       *  - Chrome === "[object HTMLTableCellElement]"
-       *  - Firefox === "[object HTMLTableCellElement]"
-       *  - Safari === "[object HTMLTableCellElement]"
-       */
-      if (obj.tagName === 'TD') {
-        return 'HTMLTableDataCellElement';
-      }
+    /* ! Spec Conformance
+     * (https://html.spec.whatwg.org/#htmltabledatacellelement)
+     * WhatWG HTML$4.9.9 - The `td` element - Interface `HTMLTableDataCellElement`
+     * Note: Most browsers currently adher to the W3C DOM Level 2 spec
+     *       (https://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-82915075)
+     *       which suggests that browsers should use HTMLTableCellElement for
+     *       both TD and TH elements. WhatWG separates these.
+     * Test: Object.prototype.toString.call(document.createElement('td'))
+     *  - Chrome === "[object HTMLTableCellElement]"
+     *  - Firefox === "[object HTMLTableCellElement]"
+     *  - Safari === "[object HTMLTableCellElement]"
+     */
+    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'TD') {
+      return 'HTMLTableDataCellElement';
+    }
 
-      /* ! Spec Conformance
-       * (https://html.spec.whatwg.org/#htmltableheadercellelement)
-       * WhatWG HTML$4.9.9 - The `td` element - Interface `HTMLTableHeaderCellElement`
-       * Note: Most browsers currently adher to the W3C DOM Level 2 spec
-       *       (https://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-82915075)
-       *       which suggests that browsers should use HTMLTableCellElement for
-       *       both TD and TH elements. WhatWG separates these.
-       * Test: Object.prototype.toString.call(document.createElement('th'))
-       *  - Chrome === "[object HTMLTableCellElement]"
-       *  - Firefox === "[object HTMLTableCellElement]"
-       *  - Safari === "[object HTMLTableCellElement]"
-       */
-      if (obj.tagName === 'TH') {
-        return 'HTMLTableHeaderCellElement';
-      }
+    /* ! Spec Conformance
+     * (https://html.spec.whatwg.org/#htmltableheadercellelement)
+     * WhatWG HTML$4.9.9 - The `td` element - Interface `HTMLTableHeaderCellElement`
+     * Note: Most browsers currently adher to the W3C DOM Level 2 spec
+     *       (https://www.w3.org/TR/DOM-Level-2-HTML/html.html#ID-82915075)
+     *       which suggests that browsers should use HTMLTableCellElement for
+     *       both TD and TH elements. WhatWG separates these.
+     * Test: Object.prototype.toString.call(document.createElement('th'))
+     *  - Chrome === "[object HTMLTableCellElement]"
+     *  - Firefox === "[object HTMLTableCellElement]"
+     *  - Safari === "[object HTMLTableCellElement]"
+     */
+    if (obj instanceof globalObject.HTMLElement && obj.tagName === 'TH') {
+      return 'HTMLTableHeaderCellElement';
     }
   }
 

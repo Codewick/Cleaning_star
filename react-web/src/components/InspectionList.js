@@ -3,9 +3,6 @@ import Inspection from './Inspection';
 
 export default function InspectionList({ inspections, clients, employees }) {
 
-  console.log(inspections)
-  console.log(clients)
-
   const modifyInspections = () => {
     let match;
     let match_final;
@@ -13,7 +10,7 @@ export default function InspectionList({ inspections, clients, employees }) {
     let matchingInspections_final = [];
     inspections.forEach(inspection => {
       clients.forEach(function(client, index) {
-        if (client._id == inspection.client) {
+        if (client._id === inspection.client) {
           console.log("match")
           // Append a clientName property to the inspection object
           match = Object.assign({}, inspection, { clientName: client.name });
@@ -26,7 +23,7 @@ export default function InspectionList({ inspections, clients, employees }) {
     });
     matchingInspections.forEach(inspection => {
       employees.forEach(function(employee, index) {
-        if (employee._id == inspection.employee) {
+        if (employee._id === inspection.employee) {
           console.log("match")
           // Append a employeeName property to the match object
           match_final = Object.assign({}, inspection, { employeeName: employee.name });
@@ -43,25 +40,17 @@ export default function InspectionList({ inspections, clients, employees }) {
     inspections = modifyInspections();
     // console.log(inspections)
     return inspections.map(inspection => {
-          return inspection ? (<Inspection key={inspection._id} inspection={inspection} />) : null
+      return inspection ? (<Inspection key={inspection._id} inspection={inspection} />) : null
     })
   }
 
 
 
-  // inspections.map(inspection => (
-  //   <div className="card blue-grey">
-  //     <Inspection key={inspection._id} {...inspection}/>
-  //   </div>
-  // ))
-
- 
-
-      return (
-      <div>
+    return (
+    <div>
       <h1>Inspection List</h1>
       { renderInspections() }
-
     </div>
+
   )
 }

@@ -7,6 +7,7 @@ import IssuesForm from '../components/IssuesForm'
 export default ({ inspections, clients, employees }) => (
   !!inspections && !!clients && !!employees ? (
     <Switch>
+
       <Route exact path='/inspections/:id' render={
         ({ match }) => {
           console.log(match)
@@ -30,8 +31,9 @@ export default ({ inspections, clients, employees }) => (
           <InspectionList inspections={inspections} clients={clients} employees={employees} />
       )} />
 
+
     </Switch>
   ) : (
-        "Loading..."
+        console.log({ inspections, clients, employees }), (<div>"Loading..."</div>)
     )
   )

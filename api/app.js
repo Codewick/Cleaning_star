@@ -4,6 +4,8 @@ const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const config = require('./config');
 const User = require('./models/user')
+const userHandlers = require('./routes/passwords.js');
+
 //const authMiddleware = require('./middleware/auth');
 
 // Create the app
@@ -27,58 +29,23 @@ app.use('/user/new', signup);
 const login = require('./routes/login');
 app.use('/login', login);
 
-
-
-app.get('/', verifyToken, (req, res) => {     //this is a callback
-  res.json({
-    message: 'Welcome to the index page',
-    resources: [{
-      inspections: '/inspections'
-    }]
-  });
-});
-
-
-app.get('/user', (req, res) => {
-
-  User.find({}, (err, user) => {
-    res.json(user);
-  })
-
-});
-
-
-app.get('/', (req, res) => {     //this is a callback
-  res.json({
-    resources: [{
-      clients: '/clients'
-    }]
-  })
-});
+const forgotPassword = require('./routes/passwords')
+app.use('/forgot_password', forgotPassword);
+//   .get(userHandlers.render_forgot_password_template)
+//   .post(userHandlers.forgot_password);
+//
+// const resetPassword = require('./routes/passwords')
+// app.use('/reset_password')
+//   .get(userHandlers.render_reset_password_template)
+//   .post(userHandlers.reset_password);
 
 
 
-app.get('/', (req, res) => {     //this is a callback
-  res.json({
-    resources: [{
-      clients: '/employees'
-    }]
-  })
-
-});
-
-function verifyToken(req, res, next){
-
-    let token = req.body.token || req.query.token || req.headers['x-access-token'];
-    if (!token) return res.status(401).send({ auth: false, message: 'No token provided.' });
-
-    jwt.verify(token, config.secret, function(err, decoded) {
-      if (err) return res.status(500).send({ auth: false, message: 'Failed to authenticate token.' });
-
-      res.status(200).send(decoded);
-    });
-
-}
-
+// TO-DO - potentially move into a router
+// app.get('/user', (req, res) => {
+//   User.find({}, (err, user) => {
+//     res.json(user);
+//   })
+// });
 
 module.exports = app;

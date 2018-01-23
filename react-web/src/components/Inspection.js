@@ -2,8 +2,10 @@ import React from 'react';
 import { Link } from 'react-router-dom';
 export default function Inspection(props) {
 
+
   const { client, clientName, date, frequency, auditor, comments, employee, employeeName, inspection, onDelete } = props.inspection;
   // const { clientName } = this.props;
+
   console.log(clientName);
 
   function deleteInspection() {
@@ -29,7 +31,7 @@ export default function Inspection(props) {
 
   return (
     <div className="inspection">
-    
+
       <span>
         Client: {clientName}
       </span>&nbsp;

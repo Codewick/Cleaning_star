@@ -2,28 +2,28 @@ const express = require('express');
 const Inspection = require('../models/inspection');
 const Client = require('../models/client');
 const Employee = require('../models/employee');
-
+const jwt = require('jsonwebtoken');
+const bcrypt = require('bcryptjs');
+const verifyToken = require('./verifyToken');
 const router = express.Router();
 
-const authorize = (req, res, next) => {
-  next(); return;
-  if (req.user) {
-    next();
-  } else {
-    res.status(403).end();
-  }
-}
 
-router.get('/', authorize, (req, res) => {
 
+// GET http://localhost:7000/inspections
+router.get('/', verifyToken, (req, res) => {
+  console.log(`request received at inspections GET endpoint ${res.body}`);
   Inspection.find()
     .populate('worker')
-    .then(inspections => res.json(inspections))
+    .then(inspections => {
+      console.log('found inspections: ', inspections);
+      return res.json(inspections);
+    })
     .catch(error => res.json({ error }))
 });
 
-router.post('/', (req, res) => {
-  console.log(`request received at inspections/ endpoint ${res.body}`);
+// POST http://localhost:7000/inspections
+router.post('/', verifyToken, (req, res) => {
+  console.log(`request received at inspections POST endpoint ${res.body}`);
   Inspection.create(req.body)
     .then((inspection) => {
       console.log(`inspection created ${inspection}`);

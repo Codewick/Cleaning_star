@@ -2,19 +2,12 @@ const express = require('express');
 const Inspection = require('../models/inspection');
 const Client = require('../models/client');
 const Employee = require('../models/employee');
+const verifyToken = require('./verifyToken');
 
 const router = express.Router();
 
-const authorize = (req, res, next) => {
-  next(); return;
-  if (req.user) {
-    next();
-  } else {
-    res.status(403).end();
-  }
-}
-
-router.get('/', authorize, (req, res) => {
+// GET http://localhost:7000/clients
+router.get('/', verifyToken, (req, res) => {
 
   Client.find()
     .populate('inspection')
@@ -22,7 +15,8 @@ router.get('/', authorize, (req, res) => {
     .catch(error => res.json({ error }))
 });
 
-router.post('/', (req, res) => {
+// POST http://localhost:7000/clients
+router.post('/', verifyToken, (req, res) => {
   Client.create(req.body)
     .then((client) => {
       res.status(201).json(client).end();

@@ -1,19 +1,31 @@
+import { token } from './auth'
+
 export function all() {
-  return fetch('/employees')
+  //console.log('TOKEN TO BE SENT TO SERVER: ', token())
+  return fetch('/employees', {
+    method: 'GET',
+    headers: {
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token()}`
+    }
+  })
     .then(res => res.json())
-    .catch(error => { console.log(error) })
+    .then(json => {
+      if (Array.isArray(json)) return json
+      throw "Invalid token"
+    })
 }
 
 export function save(employee) {
   return fetch('/employees', {
     method: 'POST',
     headers: {
-      'Content-Type': 'application/json'
+      'Content-Type': 'application/json',
+      'Authorization': `Bearer ${token()}`
     },
     body: JSON.stringify(employee)
   })
   .then(res => {
-    console.log(`response from backend: ${JSON.stringify(res)}`);
     res.json()
   })
   .catch(error => {
