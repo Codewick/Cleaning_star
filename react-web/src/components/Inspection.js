@@ -8,6 +8,11 @@ export default function Inspection(props) {
 
   console.log(clientName);
 
+  const formatedDate = date
+  console.log("this is in formatedDate variable: ", formatedDate)
+  //formatedDate.todateString()
+  //formatedDate.toDateString();
+
   function deleteInspection() {
     let url;
     url = `/inspections/${props.inspection._id}`
@@ -30,20 +35,30 @@ export default function Inspection(props) {
   }
 
   return (
-    <div className="inspection">
 
-      <span>
-        Client: {clientName}
-      </span>&nbsp;
-      <span>
-        Employee: {employeeName}
-      </span>&nbsp;
-      <span>date: {date}</span>&nbsp;
-      <span>Frequency: Every {frequency} weeks</span>&nbsp;
-      <span>Auditor: {auditor}</span>&nbsp;
-      <span>Comments: {comments}</span>&nbsp;
-      <Link to={`/inspections/${props.inspection._id}`}>Show</Link>&nbsp;
-      <Link to={`/inspections/delete/${props.inspection._id}`} onClick={deleteInspection}>Delete</Link>&nbsp;
+    <div className="row">
+
+      <div className="col s1 m3"></div>
+        <div className="col s10 m6">
+          <div className="card grey darken-4">
+          <span className="white-text">
+
+            <div className="card-content">
+
+              <span className="card-title">{clientName}</span>
+              <p>Employee: {employeeName}</p>
+              <p>Inspection date: {date}</p>
+              <p>Frequency: Every {frequency} weeks</p>
+              <p>Auditor: {auditor}</p>
+              <p>Comments: {comments}</p>
+              <Link to={`/inspections/${props.inspection._id}`}>Show</Link>
+              <Link to={`/inspections/delete/${props.inspection._id}`} onClick={deleteInspection}>Delete</Link>
+            </div>
+
+          </span>
+        </div>
+      <div className="col s1 m3"></div>
     </div>
+  </div>
   )
 }
