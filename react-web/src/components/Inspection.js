@@ -59,6 +59,7 @@ export default function Inspection(props) {
 
 
               <Link to={`/inspections/${props.inspection._id}`} className="btn waves-effect waves-light orange darken-2">Show<i className="material-icons right">open_in_new</i></Link>
+              <span> </span>
               <button className="btn waves-effect waves-light orange darken-2" onClick={deleteInspection}>Delete<i className="material-icons right">delete</i></button>
             </div>
 
