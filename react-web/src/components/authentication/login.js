@@ -1,7 +1,7 @@
 import React from 'react';
 import { Redirect } from 'react-router-dom';
 
-
+const INSPECTIONS_API_URL=`${process.env.REACT_APP_API_URL}/inspections`
 
 class LoginForm extends React.Component {
 

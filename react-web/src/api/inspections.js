@@ -1,8 +1,10 @@
 import { token } from './auth'
 
+const INSPECTIONS_API_URL=`${process.env.REACT_APP_API_URL}/inspections`
+
 export function all() {
   // console.log('TOKEN TO BE SENT TO SERVER: ', token())
-  return fetch('/inspections', {
+  return fetch(INSPECTIONS_API_URL, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
@@ -17,7 +19,7 @@ export function all() {
 }
 
 export function save(inspection) {
-  return fetch('/inspections', {
+  return fetch(INSPECTIONS_API_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',
