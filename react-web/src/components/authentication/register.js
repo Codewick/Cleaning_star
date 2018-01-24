@@ -19,39 +19,50 @@ export default function RegisterForm({onSubmit}) {
 
     <form onSubmit={handleFormSubmission}>
 
-      <label>
-        First name
-        &nbsp;
-        <input type="text" name="firstName"/>
-      </label>
+      <div className="container">
 
-      &nbsp;
+        <div className="row">
+          <div className="col m2"></div>
+            <div className="input-field col s12 m8">
+              <input id="first_name" name="firstName" type="text" className="validate"/>
+              <label for="first_name">First Name</label>
+            </div>
+          <div className="col m2"></div>
+        </div>
 
-      <label>
-        Last name
-        &nbsp;
-        <input type="text" name="lastName" />
-      </label>
 
-      &nbsp;
+        <div className="row">
+          <div className="col m2"></div>
+            <div className="input-field col s12 m8">
+              <input id="last_name" name="lastName" type="text" className="validate"/>
+              <label for="last_name">Last Name</label>
+            </div>
+          <div className="col m2"></div>
+        </div>
 
-      <label>
-        Email
-        &nbsp;
-        <input type="email" name="email" />
-      </label>
+        <div className="row">
+          <div className="col m2"></div>
+            <div className="input-field col s12 m8">
+              <input id="email" name="email" type="email" className="validate"/>
+              <label for="email">Email</label>
+            </div>
+          <div className="col m2"></div>
+        </div>
 
-      &nbsp;
+        <div className="row">
+          <div className="col m2"></div>
+            <div className="input-field col s12 m8">
+              <input id="password" name="password" type="password" className="validate"/>
+              <label for="password">Password</label>
+            </div>
+          <div className="col m2"></div>
+        </div>
 
-      <label>
-        Password
-        &nbsp;
-        <input type="password" name="password" />
-      </label>
+        <button className="btn waves-effect waves-light orange darken-2" type="submit">
+          Sign up<i className="material-icons right">send</i>
+        </button>
 
-      &nbsp;
-
-      <button type="submit">Save</button>
+      </div>
 
 
     </form>
