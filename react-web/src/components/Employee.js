@@ -26,15 +26,31 @@ export default function Employee(props) {
 
 
   return (
-    <div className="employee">
-      <span>
-        FirstName: {firstName}
-      </span>
-      <span>
-        LastName: {lastName}
-      </span>
-      <span>Contact: {contact_number}</span>
-      <Link to={`/employees/delete/${props._id}`} onClick={deleteEmployee}>Delete</Link>&nbsp;
+    <div className="row">
+      <div className="col s1 m3"></div>
+        <div className="col s10 m6">
+          <div className="card grey darken-4">
+            <span className="white-text">
+
+              <div className="card-title">{firstName + " " + lastName}</div>
+              <p>Contact: {contact_number}</p>
+
+              <button className="btn waves-effect waves-light orange darken-2" onClick={deleteEmployee}>
+                Delete<i className="material-icons right">delete</i>
+              </button>
+
+
+
+
+
+
+            </span>
+          </div>
+        </div>
+      <div className="col s1 m3"></div>
     </div>
   )
 }
+
+
+  // <Link to={`/employees/delete/${props._id}`} onClick={deleteEmployee}>Delete</Link>&nbsp;

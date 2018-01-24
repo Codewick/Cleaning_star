@@ -37,7 +37,7 @@ export default function Client(props) {
                 <p>{contact_number}</p>
                 <p>{e_mail}</p>
                 <p>{contact_person}</p>
-              <Link to={`/clients/delete/${props._id}`} onClick={deleteClient}>Delete</Link>&nbsp;
+                <button className="btn waves-effect waves-light orange darken-2" onClick={deleteClient}>Delete<i className="material-icons right">delete</i></button>
 
             </span>
           </div>

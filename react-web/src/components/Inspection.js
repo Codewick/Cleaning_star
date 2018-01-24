@@ -54,8 +54,12 @@ export default function Inspection(props) {
               <p>Frequency: Every {frequency} weeks</p>
               <p>Auditor: {auditor}</p>
               <p>Comments: {comments}</p>
-              <Link to={`/inspections/${props.inspection._id}`}>Show</Link>
-              <Link to={`/inspections/delete/${props.inspection._id}`} onClick={deleteInspection}>Delete</Link>
+
+
+
+
+              <Link to={`/inspections/${props.inspection._id}`} className="btn waves-effect waves-light orange darken-2">Show<i className="material-icons right">open_in_new</i></Link>
+              <button className="btn waves-effect waves-light orange darken-2" onClick={deleteInspection}>Delete<i className="material-icons right">delete</i></button>
             </div>
 
           </span>
