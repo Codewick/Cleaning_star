@@ -15,13 +15,18 @@ router.get('/', verifyToken, (req, res) => {
     .catch(error => res.json({ error }))
 });
 
-// POST http://localhost:7000/clients
+// POST http://localhost:7000/clients/new
 router.post('/', verifyToken, (req, res) => {
+  console.log("data received by the server", req.body)
   Client.create(req.body)
     .then((client) => {
-      res.status(201).json(client).end();
+      console.log('Successfuly saved client!!', client)
+      return res.status(201).json(client).end();
     })
-    .catch(error => res.json({ error }))
+    .catch(error => {
+      console.log('Error saving client!!', error)
+      return res.json({ error })
+    })
 });
 
 /* DELETE client */

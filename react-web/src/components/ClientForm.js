@@ -10,6 +10,7 @@ export default function ClientForm({onSubmit}) {
     const contact_number = elements["contact_number"].value;
     const e_mail = elements["e_mail"].value;
     const contact_person = elements["contact_person"].value;
+    console.log("Saved input from client form", { name, address, contact_number, e_mail, contact_person })
     onSubmit({ name, address, contact_number, e_mail, contact_person })
   }
 
