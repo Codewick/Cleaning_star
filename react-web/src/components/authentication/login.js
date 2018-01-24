@@ -31,7 +31,7 @@ class LoginForm extends React.Component {
     console.log("Saved input from login form", { email, password })
     const errors = this.validate(email, password)
     console.log({ errors })
-    
+
     // If there are errors, don't do anything more
     if (Object.keys(errors).length > 0) return
 
@@ -55,28 +55,34 @@ class LoginForm extends React.Component {
        { redirect && <Redirect to='/inspections'/> }
         <form onSubmit={this.handleFormSubmission}>
 
-          <label>
-            Login name
-            <span className="error">{ this.state.errors.email }</span>
-            &nbsp;
-            <input type="email" name="email" />
+        <div className="container">
 
-          </label>
+          <div className="row">
+            <div className="col m2"></div>
+              <div className="input-field col s12 m8">
+                <input id="email" name="email" type="email" >{ this.state.errors.email }</input>
+                <label for="email">Login Email</label>
+              </div>
+            <div className="col m2"></div>
+          </div>
 
-          &nbsp;
+          <div className="row">
+            <div className="col m2"></div>
+              <div className="input-field col s12 m8">
+                <input id="password" name="password" type="password" >{ this.state.errors.password }</input>
+                <label for="password">Password</label>
+              </div>
+            <div className="col m2"></div>
+          </div>
 
-          <label>
-            Password
-            <span className="error">{ this.state.errors.password }</span>
-            &nbsp;
-            <input type="password" name="password"/>
 
-          </label>
-
-          &nbsp;
-
-          <button type="submit">Sign In</button> &nbsp;
+          <button className="btn waves-effect waves-light orange darken-2" type="submit">
+            Login<i className="material-icons right">send</i>
+          </button>
           <span className="error">{ this.state.errors.base }</span>
+
+        </div>
+
         </form>
 
 

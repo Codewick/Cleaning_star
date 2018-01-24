@@ -163,6 +163,10 @@ class App extends Component {
 
   }
 
+  redirectForNotSignedIn = () => {
+    return !auth.isSignedIn() ? true : false;
+  }
+
 
   render() {
     const { inspections, clients, selectedClientObjectID, selectedEmployeeObjectID, employees } = this.state;
@@ -178,93 +182,109 @@ class App extends Component {
             <Nav />
             <Switch>
 
+              //inspections
+              <Route path='/inspections/update/:id' render={ ({ match }) => {
+                  // redirect if not signed in
+                  if (this.redirectForNotSignedIn()) { return <Redirect to='/signin'/> }
 
-            //inspections
+                  // continue logic if already signed in
+                  console.log('update id', match);
+                  const id = match.params.id
+                  const inspection = !!inspections ? inspections.find((inspection) => inspection._id === id) : {}
+                  const client = !!clients && !!inspections ? clients.find((client) => client._id === inspection.client) : {}
+                  const employee = !!employees && !!inspections ? employees.find((employee) => employee._id === inspection.employee) : {}
+                  return (
+                    <Edit
+                      employee={employee}
+                      inspection={inspection}
+                      client={client}
+                      clients={clients}
+                      employees={employees}
+                      selectedClientObjectID={selectedClientObjectID}
+                      selectedEmployeeObjectID={selectedEmployeeObjectID}
+                      onClientValueChange={this.handleSelectClientValueChange}
+                      onEmployeeValueChange={this.handleSelectEmployeeValueChange}
+                      onSubmit={this.handleInspectionUpdateSubmission}
+                    />
+                  )
+              }} />
 
-            <Route path='/inspections/update/:id' render={  ({ match }) => {
-                console.log('update id', match);
-                const id = match.params.id
-
-                const inspection = !!inspections ? inspections.find((inspection) => inspection._id === id) : {}
-                const client = !!clients && !!inspections ? clients.find((client) => client._id === inspection.client) : {}
-                const employee = !!employees && !!inspections ? employees.find((employee) => employee._id === inspection.employee) : {}
+              <Route path='/inspections/new' render={() => {
                 return (
-              <Edit
-                employee={employee}
-                inspection={inspection}
-                client={client}
-                clients={clients}
-                employees={employees}
-                selectedClientObjectID={selectedClientObjectID}
-                selectedEmployeeObjectID={selectedEmployeeObjectID}
-                onClientValueChange={this.handleSelectClientValueChange}
-                onEmployeeValueChange={this.handleSelectEmployeeValueChange}
-                onSubmit={this.handleInspectionUpdateSubmission}
-              />
-            )}} />
+                  this.redirectForNotSignedIn()
+                  ? <Redirect to='/signin'/>
+                  : <InspectionForm
+                      clients={clients}
+                      employees={employees}
+                      selectedClientObjectID={selectedClientObjectID}
+                      selectedEmployeeObjectID={selectedEmployeeObjectID}
+                      onClientValueChange={this.handleSelectClientValueChange}
+                      onEmployeeValueChange={this.handleSelectEmployeeValueChange}
+                      onSubmit={this.handleInspectionSubmission}
+                    />
+                )
+              }}/>
 
-
-
-              <Route path='/inspections/new' render={() => (
-                <InspectionForm
-                  clients={clients}
-                  employees={employees}
-                  selectedClientObjectID={selectedClientObjectID}
-                  selectedEmployeeObjectID={selectedEmployeeObjectID}
-                  onClientValueChange={this.handleSelectClientValueChange}
-                  onEmployeeValueChange={this.handleSelectEmployeeValueChange}
-                  onSubmit={this.handleInspectionSubmission}
-                />
-              )}/>
-
-
-              <Route path='/inspections' render={() => (
-                <InspectionPage inspections={inspections} clients={clients} employees={employees} />
-              )}/>
+              <Route path='/inspections' render={() => {
+                return (
+                  this.redirectForNotSignedIn()
+                  ? <Redirect to='/signin'/>
+                  : <InspectionPage inspections={inspections} clients={clients} employees={employees} />
+                )
+              }}/>
 
 
               //clients
-              <Route path='/clients/new' render={() => (
-                <ClientForm onSubmit={this.handleClientSubmission} />
-              )}/>
+              <Route path='/clients/new' render={() => {
+                return (
+                  this.redirectForNotSignedIn()
+                  ? <Redirect to='/signin'/>
+                  : <ClientForm onSubmit={this.handleClientSubmission} />
+                )
+              }}/>
 
-              <Route path='/clients' render={() => (
-               <ClientPage clients={clients}/>
-              )}/>
+              <Route path='/clients' render={() => {
+                return (
+                  this.redirectForNotSignedIn()
+                  ? <Redirect to='/signin'/>
+                  : <ClientPage clients={clients}/>
+                )
+              }}/>
 
 
               // employees
-              <Route path='/employees/new' render={() => (
-                <EmployeeForm onSubmit={this.handleEmployeeSubmission} />
-              )}/>
+              <Route path='/employees/new' render={() => {
+                return (
+                  this.redirectForNotSignedIn()
+                  ? <Redirect to='/signin'/>
+                  : <EmployeeForm onSubmit={this.handleEmployeeSubmission} />
+                )
+              }}/>
 
-              <Route path='/employees' render={() => (
-                <EmployeePage employees={employees}/>
-              )}/>
+              <Route path='/employees' render={() => {
+                return (
+                  this.redirectForNotSignedIn()
+                  ? <Redirect to='/signin'/>
+                  : <EmployeePage employees={employees}/>
+                )
+              }}/>
 
 
               //Authentication
               <Route path='/signin' render={() => (
                 <div>
-                { auth.isSignedIn() && <Redirect to='/inspections'/> }
-
-                  <LoginForm
-                    onSubmit={this.handleLoginSubmission}/>
+                  { auth.isSignedIn() && <Redirect to='/inspections'/> }
+                  <LoginForm onSubmit={this.handleLoginSubmission}/>
                 </div>
-              )
-              }/>
+              )}/>
 
-               <Route path='/signout' render={() => (
-                <SignOutForm
-                  onSignOut={this.handleSignOutSubmission}/>
-                 )
-               }/>
+              <Route path='/signout' render={() => (
+                <SignOutForm onSignOut={this.handleSignOutSubmission}/>
+              )}/>
 
-               <Route path='/register' render={() => (
-                <RegisterForm
-                  onSubmit={this.handleRegisterSubmission}/>
-                 )
-               }/>
+              <Route path='/register' render={() => (
+                <RegisterForm onSubmit={this.handleRegisterSubmission}/>
+              )}/>
 
 
             </Switch>

@@ -17,6 +17,7 @@ export function all() {
 }
 
 export function save(client) {
+  console.log("client data to be saved on API", { client })
   return fetch('/clients', {
     method: 'POST',
     headers: {
@@ -24,6 +25,7 @@ export function save(client) {
       'Authorization': `Bearer ${token()}`
     },
     body: JSON.stringify(client)
+
   })
   .then(res => res.json())
   .catch(error => {
