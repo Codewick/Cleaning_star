@@ -7,11 +7,14 @@ export default function Inspection(props) {
   // const { clientName } = this.props;
 
   console.log(clientName);
+  console.log('*****')
+  const d1 = new Date(Date.parse(date))
+  let month = d1.toLocaleString('en-au', { month: 'long' })
+  let year = d1.toLocaleString('en-au', { year: 'numeric' })
+  let day = d1.toLocaleString('en-au', { day: 'numeric' })
 
-  const formatedDate = date
-  console.log("this is in formatedDate variable: ", formatedDate)
-  //formatedDate.todateString()
-  //formatedDate.toDateString();
+
+
 
   function deleteInspection() {
     let url;
@@ -47,7 +50,7 @@ export default function Inspection(props) {
 
               <span className="card-title">{clientName}</span>
               <p>Employee: {employeeName}</p>
-              <p>Inspection date: {date}</p>
+              <p>Inspection date: {day + " " + month + " " + year}</p>
               <p>Frequency: Every {frequency} weeks</p>
               <p>Auditor: {auditor}</p>
               <p>Comments: {comments}</p>
