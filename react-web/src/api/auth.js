@@ -1,6 +1,7 @@
 import decodeJWT from 'jwt-decode'
+require('dotenv').config()
 
-
+const LOGIN_API_URL=`${process.env.REACT_APP_API_URL}/login`
 
 function setToken(token) {
   if (token) {
@@ -22,7 +23,7 @@ export function token() {
 
 export function loginAPI(email,password) {
   console.log("data to be fetched on API", { email,password })
-  return fetch('/login', {
+  return fetch(LOGIN_API_URL, {
     method: 'POST',
     headers: {
       'Content-Type': 'application/json',

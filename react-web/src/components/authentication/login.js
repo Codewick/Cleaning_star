@@ -52,7 +52,7 @@ class LoginForm extends React.Component {
     const { redirect } = this.state
     return (
       <div>
-       { redirect && <Redirect to='/inspections'/> }
+       { redirect && <Redirect to='https://cleaningstar-xwxwaccfar.now.sh/inspections'/> }
         <form onSubmit={this.handleFormSubmission}>
 
         <div className="container">

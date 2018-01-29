@@ -5,5 +5,5 @@ const SIGNIN_API_URL=`${process.env.REACT_APP_API_URL}/signin`
 
 export default ({ onSignOut }) => {
   onSignOut()
-  return (<Redirect to = '/signin'/>)
+  return (<Redirect to = 'https://cleaningstar-xwxwaccfar.now.sh/signin'/>)
 }

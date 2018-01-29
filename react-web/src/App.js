@@ -35,6 +35,7 @@ import SignOutForm from './components/authentication/signout'
 import RegisterForm from './components/authentication/register';
 import * as registerAPI from './api/registrations';
 
+
 class App extends Component {
   state = {
     inspections: null,
