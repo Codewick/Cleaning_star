@@ -11,7 +11,7 @@ function verifyToken(req, res, next){
     // console.log('is not token: ', !token);
     if (token === undefined) return res.status(401).send({ auth: false, message: 'No token provided.' });
 
-    jwt.verify(token, config.secret, function(err, decodedToken) {
+    jwt.verify(token, supersecret, function(err, decodedToken) {
       if (err) {
         res.status(401).json({
           message: 'Error: Token invalid'
