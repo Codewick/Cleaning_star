@@ -212,3 +212,4 @@ We made a team decision about a possibility to use Axios for fetching data from 
 ### API
 
 ### Frontend
+- dotenv package moved to development due to problem with deploy on Netlify
