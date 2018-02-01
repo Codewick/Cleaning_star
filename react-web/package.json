@@ -4,10 +4,9 @@
   "private": true,
   "engines" : {
     "node" : ">=8.9.1",
-    "npm" : "~5.6.0" 
+    "npm" : "~5.6.0"
   },
   "dependencies": {
-    "dotenv": "^5.0.0",
     "jwt-decode": "^2.2.0",
     "react": "^16.2.0",
     "react-dom": "^16.2.0",
@@ -26,6 +25,7 @@
   "devDependencies": {
     "enzyme": "^3.2.0",
     "enzyme-adapter-react-16": "^1.1.0",
-    "react-test-renderer": "^16.2.0"
+    "react-test-renderer": "^16.2.0",
+    "dotenv": "^5.0.0",
   }
 }
