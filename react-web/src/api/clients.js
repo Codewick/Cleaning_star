@@ -1,19 +1,23 @@
 import { token } from './auth'
+require('dotenv').config()
+const CLIENTS_API_URL = `${process.env.REACT_APP_API}/clients`
 
 export function all() {
   //console.log('TOKEN TO BE SENT TO SERVER: ', token())
-  return fetch('/clients', {
+  return fetch(CLIENTS_API_URL, {
     method: 'GET',
     headers: {
       'Content-Type': 'application/json',
       'Authorization': `Bearer ${token()}`
     }
   })
-    .then(res => res.json())
-    .then(json => {
-      if (Array.isArray(json)) return json
-      throw "Invalid token"
-    })
+  .then(res => res.json())
+  .catch(error => { console.log(error) })
+    // .then(res => res.json())
+    // .then(json => {
+    //   if (Array.isArray(json)) return json
+    //   throw "Invalid token"
+    // })
 }
 
 export function save(client) {
