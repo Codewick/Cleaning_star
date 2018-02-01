@@ -204,3 +204,11 @@ We made a team decision about a possibility to use Axios for fetching data from 
 ` https://medium.com/@thejasonfile/fetch-vs-axios-js-for-making-http-requests-2b261cdd3af5 `
 
 [Return to overview](#overview)
+
+## Deployment
+
+### Database
+
+### API
+
+### Frontend
