@@ -3,7 +3,7 @@ const bodyParser = require('body-parser');
 const jwt = require('jsonwebtoken');
 const bcrypt = require('bcryptjs');
 const User = require('../models/user')
-const config = require('../config');
+//const config = require('../config');
 const router = express.Router();
 
 
@@ -23,7 +23,7 @@ router.post('/', (req, res) => {
         if(err) return res.status(500).send("There was a problem logging in the user.")
 
         //create a token   //config.secret
-        jwt.sign ({email: user.email, id: user._id}, config.secret, (err, token) => {
+        jwt.sign ({email: user.email, id: user._id}, process.env.SECRETKEY, (err, token) => {
           console.log(`jwt sign err, token: `, err, token)
 
           res.status(200).send ({

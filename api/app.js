@@ -8,11 +8,19 @@ const userHandlers = require('./routes/passwords.js');
 
 //const authMiddleware = require('./middleware/auth');
 
+
 // Create the app
 const app = express();
 
 app.use(bodyParser.json()); // support json encoded bodies
 app.use(bodyParser.urlencoded({ extended: true })); // support encoded bodies
+
+app.use(function(req, res, next) {
+  res.header("Access-Control-Allow-Origin", "*");
+  res.header("Access-Control-Allow-Headers", "Authorization, Origin, X-Requested-With, Content-Type, Accept");
+  next();
+});
+
 
 const inspectionsRouter = require('./routes/inspections');
 app.use('/inspections', inspectionsRouter);
