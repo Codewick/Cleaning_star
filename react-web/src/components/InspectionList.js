@@ -1,6 +1,8 @@
 import React from 'react';
 import Inspection from './Inspection';
 import Map from './Map';
+import geoFindMe from './Location'
+import geocode from './Geocode'
 
 export default function InspectionList({ inspections, clients, employees }) {
 
@@ -57,11 +59,21 @@ export default function InspectionList({ inspections, clients, employees }) {
 
   return (
     <div>
+
+
+
+      <p><button onClick={geoFindMe}>Show my location</button></p>
+      <div id="formatted-address"></div>
+      <div id="out"></div>
+
+
       <Map
-        zoom={8}
+        zoom={18}
+        center={{ lat: -33.8820298, lng: 151.1951639 }}
         containerElement= {<div style={{width: 400, height: 400}}/>}
         mapElement={<div style={{width: 400, height: 400}}/>}
       />
+
       <h1>Inspection List</h1>
       { renderInspections() }
     </div>
